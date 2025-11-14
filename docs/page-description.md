@@ -120,9 +120,9 @@
 
   3. **Hệ thống xử lý:** Khi nhấn "Lưu", hệ thống kiểm tra ràng buộc (FR-004: mã không trùng, giá \> 0, sức chứa \> 0). Nếu hợp lệ, lưu vào bảng LOAIPHONG.
 
-  4. **Sự kiện (Xóa):** Nhấn "Xóa"42. Hệ thống kiểm tra xem loại phòng này có đang được PHONG nào sử dụng không.
+  4. **Sự kiện (Xóa):** Nhấn "Xóa". Hệ thống kiểm tra xem loại phòng này có đang được PHONG nào sử dụng không.
 
-  5. **Xử lý ràng buộc:** Nếu đang được sử dụng, hệ thống hiển thị thông báo "Không thể xóa loại phòng đang được sử dụng, chỉ có thể chỉnh sửa"44. Nếu không, cho phép xóa (xóa mềm) (FR-002)45.
+  5. **Xử lý ràng buộc:** Nếu đang được sử dụng, hệ thống hiển thị thông báo "Không thể xóa loại phòng đang được sử dụng, chỉ có thể chỉnh sửa". Nếu không, cho phép xóa (xóa mềm) (FR-002).
 
 #### **2.5. Màn hình Quản lý Đặt phòng (Reservation Management)**
 
@@ -136,11 +136,11 @@
 
   - Bộ lọc (Filters): "Loại phòng", "Số lượng khách".
 
-  - Button "Tìm phòng trống"51.
+  - Button "Tìm phòng trống".
 
   - Khu vực hiển thị kết quả: Thường là dạng Lịch (Calendar) hoặc Timeline, hiển thị các phòng và các khối đặt phòng đã có.
 
-  - Button "Tạo đặt phòng mới"53.
+  - Button "Tạo đặt phòng mới".
 
 - **Màn hình con / Component phụ:**
 
@@ -172,7 +172,7 @@
 
 - **Các Control chính:**
 
-  - Tabs: "Check-in" và "Check-out"67.
+  - Tabs: "Check-in" và "Check-out".
 
   - **Tab Check-in:**
 
@@ -186,7 +186,7 @@
 
   - **Tab Check-out:**
 
-    - Thanh tìm kiếm: Tìm theo MaPhong hoặc MaPhieuThue70.
+    - Thanh tìm kiếm: Tìm theo MaPhong hoặc MaPhieuThue.
 
     - Khu vực hiển thị chi tiết: Hiển thị thông tin phiếu thuê, tiền phòng, danh sách các dịch vụ/phụ thu/phạt đã sử dụng.
 
@@ -214,13 +214,13 @@
 
     3. Hệ thống hiển thị Form Phiếu Thuê. Lễ tân xác nhận thông tin.
 
-    4. **Hệ thống xử lý:** Khi "Lưu", hệ thống tạo PHIEUTHUEPHONG(FR-015) 79, cập nhật CHITIET_DATPHONG.TinhTrangDatPhong \= "Đã nhận" 80, và PHONG.TrangThaiPhong \= "Đang thuê"81.
+    4. **Hệ thống xử lý:** Khi "Lưu", hệ thống tạo PHIEUTHUEPHONG(FR-015) 79, cập nhật CHITIET_DATPHONG.TinhTrangDatPhong \= "Đã nhận", và PHONG.TrangThaiPhong \= "Đang thuê".
 
   - **Luồng Check-out:**
 
     1. Lễ tân tìm phiếu thuê của phòng đang trả.
 
-    2. Hệ thống tự động tính tiền phòng và hiển thị các dịch vụ đã dùng (CHITIET_TRAPHONG)838383.
+    2. Hệ thống tự động tính tiền phòng và hiển thị các dịch vụ đã dùng (CHITIET_TRAPHONG).
 
     3. Lễ tân kiểm tra phòng và (nếu cần) nhấn "Thêm Phạt" để nhập phí hư hỏng (FR-017).
 
@@ -232,11 +232,11 @@
 
 - **Mục đích chính:** Cho phép Quản lý định nghĩa, cập nhật giá và quản lý danh mục các dịch vụ mà khách sạn cung cấp (Giặt ủi, Minibar, Spa, v.v.).
 
-- **Luồng tham chiếu (Use Case):** UC1.6 \- Quản lý dịch vụ. SRS 3.5 89\.
+- **Luồng tham chiếu (Use Case):** UC1.6 \- Quản lý dịch vụ. SRS 3.5.
 
 - **Các Control chính:**
 
-  - Tabs: "Quản lý Dịch vụ" (ví dụ: "Nước suối", "Giặt ủi 1kg") và "Quản lý Loại Dịch vụ" (ví dụ: "Minibar", "Giặt ủi")9090.
+  - Tabs: "Quản lý Dịch vụ" (ví dụ: "Nước suối", "Giặt ủi 1kg") và "Quản lý Loại Dịch vụ" (ví dụ: "Minibar", "Giặt ủi").
 
   - Bảng danh sách (cho cả Dịch vụ và Loại Dịch vụ).
 
@@ -258,13 +258,13 @@
 
   4. Các dịch vụ này sau đó sẽ khả dụng để Lễ tân chọn trong "Modal Thêm Dịch vụ" ở màn hình Check-out.
 
-  5. **Sự kiện (Xóa):** Nếu xóa một dịch vụ đã từng được sử dụng (có trong CHITIET_TRAPHONG lịch sử), hệ thống nên thực hiện xóa mềm (soft-delete) để đảm bảo tính toàn vẹn của báo cáo c.
+  5. **Sự kiện (Xóa):** Nếu xóa một dịch vụ đã từng được sử dụng (có trong CHITIET_TRAPHONG lịch sử), hệ thống nên thực hiện xóa mềm (soft-delete) để đảm bảo tính toàn vẹn của báo cáo.
 
 #### **2.8. Màn hình Quản lý Thanh toán & Hóa đơn (Payment & Invoice Management)**
 
 - **Mục đích chính:** Xử lý giao dịch tài chính cuối cùng khi check-out và tạo/in hóa đơn cho khách.
 
-- **Luồng tham chiếu (Use Case):** UC1.8 \- Quản lý thanh toán và hóa đơ. SRS 3.7 98\.
+- **Luồng tham chiếu (Use Case):** UC1.8 \- Quản lý thanh toán và hóa đơ. SRS 3.7.
 
 - **Lưu ý:** Màn hình này thường không đứng riêng lẻ mà là một **Modal (Form)** được gọi từ Màn hình Check-out.
 
@@ -274,7 +274,7 @@
 
   - Dropdown "Chọn phương thức thanh toán" (HINHTHUCTHANHTOAN: Tiền mặt, Thẻ tín dụng, Chuyển khoản...).
 
-  - (Tùy chọn) Các trường nhập thông tin thanh toán (nếu tích hợp cổng thanh toán)101.
+  - (Tùy chọn) Các trường nhập thông tin thanh toán (nếu tích hợp cổng thanh toán).
 
   - Button "Xác nhận Thanh toán".
 
@@ -296,7 +296,7 @@
 
   5. **Thành công:** Hệ thống tạo bản ghi TRAPHONG và HOADON (FR-028). Cập nhật trạng thái phiếu thuê là "Đã thanh toán".
 
-  6. **Thất bại (ví dụ: thẻ bị từ chối):** Hệ thống hiển thị thông báo lỗi. Lễ tân yêu cầu khách đổi phương thức khác (quay lại bước 2)111.
+  6. **Thất bại (ví dụ: thẻ bị từ chối):** Hệ thống hiển thị thông báo lỗi. Lễ tân yêu cầu khách đổi phương thức khác (quay lại bước 2).
 
   7. **Sự kiện (In Hóa đơn):** Sau khi thành công, Lễ tân nhấn "In Hóa đơn". Hệ thống tạo file PDF/view in (FR-030) và gửi lệnh in.
 
@@ -304,7 +304,7 @@
 
 - **Mục đích chính:** Cho phép Admin tạo, quản lý tài khoản nhân viên và gán quyền hạn truy cập hệ thống.
 
-- **Luồng tham chiếu (Use Case):** UC1.7 \- Quản lý nhân viên và phân quyền. SRS 3.6 115\.
+- **Luồng tham chiếu (Use Case):** UC1.7 \- Quản lý nhân viên và phân quyền. SRS 3.6.
 
 - **Các Control chính:**
 
@@ -344,9 +344,9 @@
 
   6. Admin gán vai trò (ví dụ: "Lễ tân") và tạo mật khẩu.
 
-  7. **Hệ thống xử lý:** Hệ thống tạo bản ghi PHANQUYEN (FR-025)127. Nhân viên này giờ có thể đăng nhập với quyền Lễ tân.
+  7. **Hệ thống xử lý:** Hệ thống tạo bản ghi PHANQUYEN (FR-025). Nhân viên này giờ có thể đăng nhập với quyền Lễ tân.
 
-  8. **Sự kiện (Vô hiệu hóa):** Admin nhấn "Vô hiệu hóa" (thay vì Xóa)128128128. Hệ thống cập nhật NHANVIEN.TinhTrangLamViec và vô hiệu hóa tài khoản đăng nhập (Deactivate Account).
+  8. **Sự kiện (Vô hiệu hóa):** Admin nhấn "Vô hiệu hóa" (thay vì Xóa). Hệ thống cập nhật NHANVIEN.TinhTrangLamViec và vô hiệu hóa tài khoản đăng nhập (Deactivate Account).
 
 #### **2.10. Màn hình Báo cáo & Thống kê (Admin)**
 
@@ -362,7 +362,7 @@
 
   - Button "Xem Báo cáo" (Generate Report).
 
-  - Button "Xuất PDF" / "Xuất Excel" (FR-036)138.
+  - Button "Xuất PDF" / "Xuất Excel" (FR-036).
 
   - Khu vực hiển thị kết quả (Result Area): Hiển thị bảng dữ liệu (Table) và/hoặc Biểu đồ (Chart).
 
