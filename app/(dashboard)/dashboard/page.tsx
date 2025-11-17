@@ -26,16 +26,13 @@ import {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const user = getCurrentUser();
 
   useEffect(() => {
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
+    if (!user) {
       router.push("/login");
-      return;
     }
-    setUser(currentUser);
-  }, [router]);
+  }, [user, router]);
 
   const handleLogout = () => {
     mockLogout();

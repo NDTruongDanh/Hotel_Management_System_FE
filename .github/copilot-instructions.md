@@ -28,6 +28,8 @@ This is a Next.js 16 (App Router) hotel management system frontend built with Re
 Primary-600: #1E40AF; // Buttons, headers
 Primary-500: #3B82F6; // Hover states
 Primary-400: #60A5FA; // Active elements
+Primary-300: #93C5FD; // Secondary highlights
+Primary-200: #BFDBFE; // Light accents
 Primary-100: #DBEAFE; // Backgrounds, subtle highlights
 Primary-50: #EFF6FF;  // Very light backgrounds
 
