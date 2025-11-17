@@ -201,7 +201,8 @@ const STATUS_COLORS = {
 3. **Don't** forget to handle Vietnamese diacritics in forms
 4. **Always** use `Image` from next/image for optimized images
 5. **Always** check role permissions before rendering admin features
-6. **Verify** conflict detection when creating/modifying reservations (FR-009)
+6. **Always** use cn() utility for conditional classNames
+7. **Verify** conflict detection when creating/modifying reservations (FR-009)
 
 ## Testing Approach
 

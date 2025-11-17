@@ -32,6 +32,12 @@ import {
   DollarSign,
   UserCheck,
   Clock,
+  Utensils,
+  Receipt,
+  FileText,
+  BarChart3,
+  ClipboardList,
+  UserCog,
 } from "lucide-react";
 
 export const ICONS = {
@@ -68,4 +74,10 @@ export const ICONS = {
   DOLLAR_SIGN: <DollarSign />,
   USER_CHECK: <UserCheck />,
   CLOCK: <Clock />,
+  UTENSILS: <Utensils />,
+  RECEIPT: <Receipt />,
+  FILE_TEXT: <FileText />,
+  BAR_CHART: <BarChart3 />,
+  CLIPBOARD_LIST: <ClipboardList />,
+  USER_COG: <UserCog />,
 };

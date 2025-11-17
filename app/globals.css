@@ -9,7 +9,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: 30.07% 0.1207 264.7; /* #1E40AF - Primary-600 */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -30,7 +30,7 @@
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: 30.07% 0.1207 264.7; /* #1E40AF */
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
@@ -151,14 +151,13 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Primary Blue Colors */
-  --color-primary-blue-600: var(--primary-blue-600);
-  --color-primary-blue-500: var(--primary-blue-500);
-  --color-primary-blue-400: var(--primary-blue-400);
-  --color-primary-blue-100: var(--primary-blue-100);
-  --color-primary-blue-50: var(--primary-blue-50);
+  /* Custom Color Palette */
+  --color-primary-600: var(--primary-blue-600);
+  --color-primary-500: var(--primary-blue-500);
+  --color-primary-400: var(--primary-blue-400);
+  --color-primary-100: var(--primary-blue-100);
+  --color-primary-50: var(--primary-blue-50);
 
-  /* Gray Neutral Colors */
   --color-gray-900: var(--gray-900);
   --color-gray-700: var(--gray-700);
   --color-gray-500: var(--gray-500);
@@ -167,27 +166,22 @@
   --color-gray-100: var(--gray-100);
   --color-gray-50: var(--gray-50);
 
-  /* Success Colors */
   --color-success-600: var(--success-600);
   --color-success-500: var(--success-500);
   --color-success-100: var(--success-100);
 
-  /* Warning Colors */
   --color-warning-600: var(--warning-600);
   --color-warning-500: var(--warning-500);
   --color-warning-100: var(--warning-100);
 
-  /* Error Colors */
   --color-error-600: var(--error-600);
   --color-error-500: var(--error-500);
   --color-error-100: var(--error-100);
 
-  /* Info Colors */
   --color-info-600: var(--info-600);
   --color-info-500: var(--info-500);
   --color-info-100: var(--info-100);
 
-  /* Accent Gold Colors */
   --color-accent-gold-500: var(--accent-gold-500);
   --color-accent-gold-100: var(--accent-gold-100);
 }
