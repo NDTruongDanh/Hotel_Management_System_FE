@@ -26,6 +26,12 @@ import {
   ChevronRight,
   ChevronLeft,
   MoreVertical,
+  Home,
+  BedDouble,
+  TrendingUp,
+  DollarSign,
+  UserCheck,
+  Clock,
 } from "lucide-react";
 
 export const ICONS = {
@@ -56,4 +62,10 @@ export const ICONS = {
   CHEVRON_RIGHT: <ChevronRight />,
   CHEVRON_LEFT: <ChevronLeft />,
   MORE: <MoreVertical />,
+  HOME: <Home />,
+  BED_DOUBLE: <BedDouble />,
+  TRENDING_UP: <TrendingUp />,
+  DOLLAR_SIGN: <DollarSign />,
+  USER_CHECK: <UserCheck />,
+  CLOCK: <Clock />,
 };
