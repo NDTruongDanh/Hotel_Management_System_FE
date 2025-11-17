@@ -21,23 +21,29 @@ This is a Next.js 16 (App Router) hotel management system frontend built with Re
 
 ### Color Palette
 
+**Full description in** `/docs/ui-specifications.md`
+
 ```typescript
-// Primary: Professional Blue
-Primary-600: #1E40AF  // Buttons, headers
-Primary-500: #3B82F6  // Hover states
-Primary-100: #DBEAFE  // Backgrounds
+// Primary Colors
+Primary-600: #1E40AF; // Buttons, headers
+Primary-500: #3B82F6; // Hover states
+Primary-400: #60A5FA; // Active elements
+Primary-100: #DBEAFE; // Backgrounds, subtle highlights
+Primary-50: #EFF6FF;  // Very light backgrounds
 
 // Status Colors
-Success-600: #059669   // Available rooms, successful operations
-Warning-600: #D97706   // Rooms being cleaned, warnings
-Error-600: #DC2626     // Maintenance, errors
-Info-600: #0284C7      // Occupied rooms
+Success-600: #059669; // Available rooms, successful operations
+Warning-600: #D97706; // Rooms being cleaned, warnings
+Error-600: #DC2626;   // Maintenance, errors
+Info-600: #0284C7;    // Occupied rooms
 
 // Neutrals
-Gray-900: #111827      // Primary text
-Gray-700: #374151      // Secondary text
-Gray-300: #D1D5DB      // Borders
-Gray-50: #F9FAFB       // Page backgrounds
+Gray-900: #111827;    // Primary text
+Gray-700: #374151;    // Secondary text
+Gray-500: #6B7280;    // Placeholder, disabled text
+Gray-300: #D1D5DB;    // Borders, dividers
+Gray-100: #F3F4F6;    // Background sections
+Gray-50: #F9FAFB;     // Page backgrounds
 ```
 
 ### Typography
@@ -111,23 +117,23 @@ npm run lint     # ESLint with Next.js config
 ### Component Structure
 
 ```tsx
-'use client'; // Only if using hooks/interactivity
+"use client"; // Only if using hooks/interactivity
 
-import { useState } from 'react';
-import type { RoomStatus } from '@/types';
+import { useState } from "react";
+import type { RoomStatus } from "@/types";
 
 interface RoomCardProps {
-	roomNumber: string;
-	status: RoomStatus;
-	onStatusChange?: (status: RoomStatus) => void;
+  roomNumber: string;
+  status: RoomStatus;
+  onStatusChange?: (status: RoomStatus) => void;
 }
 
 export function RoomCard({
-	roomNumber,
-	status,
-	onStatusChange,
+  roomNumber,
+  status,
+  onStatusChange,
 }: RoomCardProps) {
-	// Implementation
+  // Implementation
 }
 ```
 
@@ -155,19 +161,6 @@ export function RoomCard({
 <div className="bg-[var(--color-background)]">
 ```
 
-## Database Entities (Backend Context)
-
-Key tables referenced in workflows:
-
-- `PHONG` (rooms) - TrangThaiPhong status
-- `LOAIPHONG` (room types) - pricing, capacity
-- `DATPHONG` (reservations) - booking records
-- `PHIEUTHUEPHONG` (rental receipts) - check-in records
-- `TRAPHONG` (checkouts) - payment records
-- `DICHVU` (services) - minibar, laundry, etc.
-- `NHANVIEN` (staff) - employee records
-- `PHANQUYEN` (permissions) - role-based access
-
 ## Vietnamese Language
 
 All UI text should be in Vietnamese:
@@ -182,10 +175,10 @@ All UI text should be in Vietnamese:
 
 ```typescript
 const STATUS_COLORS = {
-	Trống: 'bg-success-100 text-success-700',
-	'Đang thuê': 'bg-info-100 text-info-700',
-	'Đang dọn dẹp': 'bg-warning-100 text-warning-700',
-	'Bảo trì': 'bg-error-100 text-error-700',
+  Trống: "bg-success-100 text-success-700",
+  "Đang thuê": "bg-info-100 text-info-700",
+  "Đang dọn dẹp": "bg-warning-100 text-warning-700",
+  "Bảo trì": "bg-error-100 text-error-700",
 };
 ```
 
@@ -233,6 +226,40 @@ When referencing external libraries or frameworks, always use Context7 to fetch 
 - Use `get-library-docs` to fetch the latest documentation for the library.
 
 Refer to the Context7 documentation for detailed usage instructions.
+
+## ShadCN UI Integration
+
+### Using ShadCN UI for Common Components
+
+To streamline development and ensure consistency, use ShadCN UI for common components such as buttons, modals, inputs, and tables, etc. Always restyle these components to align with the app's design system and theme.
+
+### Restyling ShadCN Components
+
+When styling ShadCN UI components, always reference the project's color palette.
+
+1. **Buttons:** Use `bg-primary-600`, `hover:bg-primary-500`, `text-white`, and `rounded-md`.
+2. **Modals:** Ensure `backdrop-filter: blur(2px)` and max width of 600px or 800px.
+3. **Inputs:** Add `border-gray-300`, `focus:ring-primary-500`, and `rounded-md`.
+4. **Tables:** Style headers with `bg-gray-50` and rows with `hover:bg-gray-50`.
+
+Never override ShadCN component styles with hardcoded colors. Instead:
+
+1. Use semantic tokens: bg-primary, text-foreground, border-border
+2. Use palette tokens: bg-primary-blue-500, text-feedback-error
+3. Modify CSS variables in globals.css for theme-wide changes
+
+## Use lucid-react for Icons
+
+All icons must be imported from the centralized `ICONS` enum in `src/constants/icons.enum.tsx`. This enum exports commonly used Lucide icons as JSX elements.
+if you need a new icon, add it to the `ICONS` enum like so:
+
+```tsx
+import { IconName } from "lucide-react";
+export const ICONS = {
+  NEW_ICON: <IconName />,
+  // ...other icons
+};
+```
 
 ---
 
