@@ -100,10 +100,10 @@ app/
 ## Development Commands
 
 ```bash
-npm run dev      # Start dev server (localhost:3000)
-npm run build    # Production build
-npm run start    # Start production server
-npm run lint     # ESLint with Next.js config
+pnpm run dev      # Start dev server (localhost:3000)
+pnpm run build    # Production build
+pnpm run start    # Start production server
+pnpm run lint     # ESLint with Next.js config
 ```
 
 ## Coding Conventions
@@ -217,6 +217,7 @@ const STATUS_COLORS = {
 3. **Vietnamese UI:** All user-facing text in Vietnamese
 4. **TypeScript strict:** No `any` types, proper interfaces for all props
 5. **Accessibility:** Proper ARIA labels (especially for Vietnamese screen readers)
+6. **Write code in English:** Only use Vietnamese for UI text, other than that, use English for code comments, variable names, etc.
 
 ## Always Use Context7 for Documentation
 
@@ -247,6 +248,12 @@ Never override ShadCN component styles with hardcoded colors. Instead:
 1. Use semantic tokens: bg-primary, text-foreground, border-border
 2. Use palette tokens: bg-primary-blue-500, text-feedback-error
 3. Modify CSS variables in globals.css for theme-wide changes
+
+**If a needed component doesn't exist**, add it using:
+
+```bash
+npx shadcn@latest add [component-name]
+```
 
 ## Use lucid-react for Icons
 
