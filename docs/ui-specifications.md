@@ -31,6 +31,8 @@ Primary Color (Màu chủ đạo \- Xanh dương sang trọng)
 \- Primary-600: \#1E40AF (Chủ đạo cho buttons, headers)  
 \- Primary-500: \#3B82F6 (Hover states)  
 \- Primary-400: \#60A5FA (Active elements)  
+\- Primary-300: \#93C5FD (Secondary highlights)
+\- Primary-200: \#BFDBFE (Light accents)
 \- Primary-100: \#DBEAFE (Backgrounds, subtle highlights)  
 \- Primary-50: \#EFF6FF (Very light backgrounds)
 

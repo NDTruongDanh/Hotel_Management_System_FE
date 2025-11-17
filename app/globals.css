@@ -41,6 +41,8 @@
   --primary-blue-600: #1e40af;
   --primary-blue-500: #3b82f6;
   --primary-blue-400: #60a5fa;
+  --primary-blue-300: #93c5fd;
+  --primary-blue-200: #bfdbfe;
   --primary-blue-100: #dbeafe;
   --primary-blue-50: #eff6ff;
 
@@ -155,6 +157,8 @@
   --color-primary-600: var(--primary-blue-600);
   --color-primary-500: var(--primary-blue-500);
   --color-primary-400: var(--primary-blue-400);
+  --color-primary-300: var(--primary-blue-300);
+  --color-primary-200: var(--primary-blue-200);
   --color-primary-100: var(--primary-blue-100);
   --color-primary-50: var(--primary-blue-50);
 

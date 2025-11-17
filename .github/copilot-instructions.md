@@ -28,6 +28,8 @@ This is a Next.js 16 (App Router) hotel management system frontend built with Re
 Primary-600: #1E40AF; // Buttons, headers
 Primary-500: #3B82F6; // Hover states
 Primary-400: #60A5FA; // Active elements
+Primary-300: #93C5FD; // Secondary highlights
+Primary-200: #BFDBFE; // Light accents
 Primary-100: #DBEAFE; // Backgrounds, subtle highlights
 Primary-50: #EFF6FF;  // Very light backgrounds
 
@@ -45,6 +47,10 @@ Gray-300: #D1D5DB;    // Borders, dividers
 Gray-100: #F3F4F6;    // Background sections
 Gray-50: #F9FAFB;     // Page backgrounds
 ```
+
+**IMPORTANT:** Always use semantic tokens (e.g., bg-primary, text-foreground) or palette tokens (e.g., bg-primary-600) instead of hardcoded hex colors in your components.
+If you need to adjust colors globally, modify the CSS variables in `globals.css`.
+If you need a new color, discuss with the team to maintain consistency.
 
 ### Typography
 
@@ -148,6 +154,12 @@ export function RoomCard({
 - Server Components by default for data fetching
 - Client Components (`'use client'`) only when needed (forms, interactivity)
 - Use Next.js 16 `fetch` with cache/revalidate options
+
+### Separate Logic and UI Code
+
+- Business logic in `/lib` or `/hooks`
+- UI components in `/components`
+- Never mix data fetching/business logic directly in UI components
 
 ### Styling Approach
 

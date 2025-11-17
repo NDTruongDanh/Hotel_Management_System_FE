@@ -3,8 +3,10 @@
 import * as React from "react";
 import { ICONS } from "@/src/constants/icons.enum";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { getCurrentUser } from "@/lib/mock-auth";
 
 export function Navbar() {
+  const user = getCurrentUser();
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b border-gray-200 bg-white px-4 shadow-sm">
       <SidebarTrigger className="h-10 w-10 hover:bg-gray-100 transition-colors" />
@@ -28,8 +30,10 @@ export function Navbar() {
               {ICONS.USER}
             </div>
             <div className="flex flex-col">
-              <span className="text-sm font-medium text-gray-900">Admin</span>
-              <span className="text-xs text-gray-500">Quản trị viên</span>
+              <span className="text-sm font-medium text-gray-900">
+                {user?.role}
+              </span>
+              {/* <span className="text-xs text-gray-500">{user?.role}</span> */}
             </div>
             {ICONS.CHEVRON_DOWN}
           </div>
