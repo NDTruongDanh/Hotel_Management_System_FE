@@ -177,12 +177,12 @@ export function RoomFilters({
                 <SelectContent>
                   <SelectItem value="Tất cả">Tất cả loại phòng</SelectItem>
                   {uniqueRoomTypes.map((type) => (
-                    <SelectItem key={type.maLoaiPhong} value={type.maLoaiPhong}>
+                    <SelectItem key={type.roomTypeID} value={type.roomTypeID}>
                       <div className="flex items-center gap-2">
                         <span className="text-gray-400">
                           {ICONS.BED_DOUBLE}
                         </span>
-                        {type.tenLoaiPhong}
+                        {type.roomTypeName}
                       </div>
                     </SelectItem>
                   ))}
