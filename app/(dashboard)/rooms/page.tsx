@@ -53,10 +53,10 @@ export default function RoomsPage() {
   const handleDeleteRoom = (room: Room) => {
     if (
       window.confirm(
-        `Bạn có chắc chắn muốn xóa ${room.tenPhong}?\n\nLưu ý: Nên thực hiện xóa mềm thay vì xóa hoàn toàn.`
+        `Bạn có chắc chắn muốn xóa ${room.roomName}?\n\nLưu ý: Nên thực hiện xóa mềm thay vì xóa hoàn toàn.`
       )
     ) {
-      setRooms((prev) => prev.filter((r) => r.maPhong !== room.maPhong));
+      setRooms((prev) => prev.filter((r) => r.roomCode !== room.roomCode));
     }
   };
 
@@ -65,7 +65,7 @@ export default function RoomsPage() {
     if (newStatus === "Bảo trì") {
       if (
         !window.confirm(
-          `Đánh dấu ${room.tenPhong} là "Bảo trì"?\n\nCảnh báo: Nếu có đặt phòng trong tương lai, cần kiểm tra và xử lý.`
+          `Đánh dấu ${room.roomName} là "Bảo trì"?\n\nCảnh báo: Nếu có đặt phòng trong tương lai, cần kiểm tra và xử lý.`
         )
       ) {
         return;
@@ -74,7 +74,7 @@ export default function RoomsPage() {
 
     setRooms((prev) =>
       prev.map((r) =>
-        r.maPhong === room.maPhong ? { ...r, trangThaiPhong: newStatus } : r
+        r.roomCode === room.roomCode ? { ...r, trangThaiPhong: newStatus } : r
       )
     );
   };
@@ -84,14 +84,14 @@ export default function RoomsPage() {
       // Update existing room
       setRooms((prev) =>
         prev.map((r) =>
-          r.maPhong === editingRoom.maPhong
+          r.roomCode === editingRoom.roomCode
             ? { ...r, ...(roomData as Room) }
             : r
         )
       );
     } else {
       // Add new room
-      if (rooms.find((r) => r.maPhong === roomData.maPhong)) {
+      if (rooms.find((r) => r.roomCode === roomData.roomCode)) {
         alert("Mã phòng đã tồn tại. Vui lòng chọn mã khác.");
         return;
       }
@@ -216,7 +216,7 @@ export default function RoomsPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
           {filteredRooms.map((room) => (
             <RoomCard
-              key={room.maPhong}
+              key={room.roomCode}
               room={room}
               onEdit={handleEditRoom}
               onDelete={handleDeleteRoom}

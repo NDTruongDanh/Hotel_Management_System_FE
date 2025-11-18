@@ -3,21 +3,21 @@ export type RoomStatus = "Trống" | "Đang thuê" | "Đang dọn dẹp" | "Bả
 
 // Room Type
 export interface RoomType {
-  maLoaiPhong: string;
-  tenLoaiPhong: string;
-  gia: number;
-  sucChua: number;
-  tienNghi: string[];
+  roomTypeID: string;
+  roomTypeName: string;
+  price: number;
+  capacity: number;
+  amenities: string[];
 }
 
 // Room
 export interface Room {
-  maPhong: string;
-  tenPhong: string;
-  maLoaiPhong: string;
-  loaiPhong: RoomType;
-  trangThaiPhong: RoomStatus;
-  tang: number;
+  roomID: string;
+  roomName: string;
+  roomTypeID: string;
+  roomType: RoomType;
+  roomStatus: RoomStatus;
+  floor: number;
 }
 
 // Filter Options

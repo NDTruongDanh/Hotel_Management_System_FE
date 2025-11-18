@@ -1,99 +1,48 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { RoomType } from "@/lib/types/room";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ICONS } from "@/src/constants/icons.enum";
-import {
-  getRoomTypes,
-  createRoomType,
-  updateRoomType,
-  deleteRoomType,
-  checkRoomTypeInUse,
-} from "@/lib/mock-room-types";
 import { RoomTypeFormModal } from "@/components/room-types/room-type-form-modal";
 import { RoomTypeTable } from "@/components/room-types/room-type-table";
+import { StatsCards } from "@/components/room-types/stats-cards";
+import { QuickAddSection } from "@/components/room-types/quick-add-section";
+import { useRoomTypes } from "@/hooks/use-room-types";
+import { useMemo } from "react";
 
 export default function RoomTypesPage() {
-  const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingRoomType, setEditingRoomType] = useState<RoomType | null>(null);
-  const [isDeleting, setIsDeleting] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    roomTypes,
+    loading,
+    modalOpen,
+    editingRoomType,
+    isDeleting,
+    error,
+    setModalOpen,
+    handleAddNew,
+    handleEdit,
+    handleSave,
+    handleDelete,
+    handleSelectTemplate,
+    clearError,
+  } = useRoomTypes();
 
-  useEffect(() => {
-    loadRoomTypes();
-  }, []);
-
-  const loadRoomTypes = async () => {
-    try {
-      setLoading(true);
-      const data = await getRoomTypes();
-      setRoomTypes(data);
-      setError(null);
-    } catch (err) {
-      console.error("Error loading room types:", err);
-      setError("Không thể tải danh sách loại phòng");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAddNew = () => {
-    setEditingRoomType(null);
-    setModalOpen(true);
-  };
-
-  const handleEdit = (roomType: RoomType) => {
-    setEditingRoomType(roomType);
-    setModalOpen(true);
-  };
-
-  const handleSave = async (roomTypeData: Partial<RoomType>) => {
-    try {
-      if (editingRoomType) {
-        // Update existing room type
-        await updateRoomType(editingRoomType.maLoaiPhong, roomTypeData);
-      } else {
-        // Create new room type
-        await createRoomType(roomTypeData as Omit<RoomType, "maLoaiPhong">);
-      }
-      await loadRoomTypes();
-      setModalOpen(false);
-      setEditingRoomType(null);
-    } catch (err) {
-      throw new Error(
-        err instanceof Error ? err.message : "Không thể lưu loại phòng"
-      );
-    }
-  };
-
-  const handleDelete = async (maLoaiPhong: string) => {
-    // Check if room type is in use
-    const inUse = checkRoomTypeInUse(maLoaiPhong);
-
-    if (inUse) {
-      setError(
-        "Không thể xóa loại phòng đang được sử dụng. Bạn chỉ có thể chỉnh sửa thông tin."
-      );
-      setTimeout(() => setError(null), 5000);
-      return;
+  const stats = useMemo(() => {
+    if (roomTypes.length === 0) {
+      return {
+        total: 0,
+        minPrice: null,
+        maxPrice: null,
+      };
     }
 
-    try {
-      setIsDeleting(maLoaiPhong);
-      await deleteRoomType(maLoaiPhong);
-      await loadRoomTypes();
-      setError(null);
-    } catch (err) {
-      console.error("Error deleting room type:", err);
-      setError(err instanceof Error ? err.message : "Không thể xóa loại phòng");
-      setTimeout(() => setError(null), 5000);
-    } finally {
-      setIsDeleting(null);
-    }
-  };
+    const prices = roomTypes.map((rt) => rt.price);
+    return {
+      total: roomTypes.length,
+      minPrice: Math.min(...prices),
+      maxPrice: Math.max(...prices),
+    };
+  }, [roomTypes]);
 
   return (
     <div className="space-y-6">
@@ -118,84 +67,32 @@ export default function RoomTypesPage() {
 
       {/* Error Message */}
       {error && (
-        <div className="p-4 bg-error-100 border border-error-600 rounded-lg">
-          <div className="flex items-start gap-3">
-            <span className="w-5 h-5 text-error-600 shrink-0 mt-0.5">
-              {ICONS.ALERT}
-            </span>
-            <div className="flex-1">
-              <p className="text-sm font-medium text-error-600">{error}</p>
-            </div>
-            <button
-              onClick={() => setError(null)}
-              className="text-error-600 hover:text-error-700"
-            >
-              <span className="w-4 h-4">{ICONS.CLOSE}</span>
-            </button>
-          </div>
-        </div>
+        <Alert variant="destructive" className="relative">
+          <span className="w-4 h-4">{ICONS.ALERT}</span>
+          <AlertTitle>Lỗi</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+          <button
+            onClick={clearError}
+            className="absolute top-3 right-3 text-current hover:opacity-70 transition-opacity"
+            aria-label="Đóng"
+          >
+            <span className="w-4 h-4">{ICONS.CLOSE}</span>
+          </button>
+        </Alert>
       )}
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">Tổng loại phòng</p>
-              <p className="text-2xl font-semibold text-gray-900 mt-1">
-                {roomTypes.length}
-              </p>
-            </div>
-            <div className="w-12 h-12 bg-primary-blue-100 rounded-lg flex items-center justify-center">
-              <span className="w-6 h-6 text-primary-blue-600">
-                {ICONS.BED_DOUBLE}
-              </span>
-            </div>
-          </div>
-        </div>
+      <StatsCards
+        totalRoomTypes={stats.total}
+        minPrice={stats.minPrice}
+        maxPrice={stats.maxPrice}
+      />
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">Giá thấp nhất</p>
-              <p className="text-2xl font-semibold text-gray-900 mt-1">
-                {roomTypes.length > 0
-                  ? new Intl.NumberFormat("vi-VN", {
-                      style: "currency",
-                      currency: "VND",
-                    }).format(Math.min(...roomTypes.map((rt) => rt.gia)))
-                  : "0 ₫"}
-              </p>
-            </div>
-            <div className="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
-              <span className="w-6 h-6 text-success-600">
-                {ICONS.DOLLAR_SIGN}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500">Giá cao nhất</p>
-              <p className="text-2xl font-semibold text-gray-900 mt-1">
-                {roomTypes.length > 0
-                  ? new Intl.NumberFormat("vi-VN", {
-                      style: "currency",
-                      currency: "VND",
-                    }).format(Math.max(...roomTypes.map((rt) => rt.gia)))
-                  : "0 ₫"}
-              </p>
-            </div>
-            <div className="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
-              <span className="w-6 h-6 text-warning-600">
-                {ICONS.TRENDING_UP}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Quick Add Section */}
+      <QuickAddSection
+        onAddNew={handleAddNew}
+        onSelectTemplate={handleSelectTemplate}
+      />
 
       {/* Loading State */}
       {loading ? (

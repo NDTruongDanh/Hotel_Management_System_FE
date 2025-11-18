@@ -26,7 +26,7 @@ import { formatCurrency } from "@/lib/utils";
 interface RoomTypeTableProps {
   roomTypes: RoomType[];
   onEdit: (roomType: RoomType) => void;
-  onDelete: (maLoaiPhong: string) => void;
+  onDelete: (roomTypeID: string) => void;
   isDeleting?: string | null;
 }
 
@@ -50,7 +50,7 @@ export function RoomTypeTable({
 
   const handleDeleteConfirm = () => {
     if (deleteConfirm.roomType) {
-      onDelete(deleteConfirm.roomType.maLoaiPhong);
+      onDelete(deleteConfirm.roomType.roomTypeID);
       setDeleteConfirm({ open: false, roomType: null });
     }
   };
@@ -98,29 +98,29 @@ export function RoomTypeTable({
           <TableBody>
             {roomTypes.map((roomType) => (
               <TableRow
-                key={roomType.maLoaiPhong}
+                key={roomType.roomTypeID}
                 className="hover:bg-gray-50 transition-colors"
               >
                 <TableCell className="font-medium text-gray-900">
-                  {roomType.maLoaiPhong}
+                  {roomType.roomTypeID}
                 </TableCell>
                 <TableCell className="font-medium text-gray-900">
-                  {roomType.tenLoaiPhong}
+                  {roomType.roomTypeName}
                 </TableCell>
                 <TableCell className="text-right font-medium text-gray-900">
-                  {formatCurrency(roomType.gia)}
+                  {formatCurrency(roomType.price)}
                 </TableCell>
                 <TableCell className="text-center">
                   <Badge
                     variant="outline"
                     className="bg-primary-blue-50 text-primary-blue-700 border-primary-blue-200"
                   >
-                    {roomType.sucChua} người
+                    {roomType.capacity} người
                   </Badge>
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-wrap gap-1">
-                    {roomType.tienNghi.slice(0, 3).map((amenity, index) => (
+                    {roomType.amenities.slice(0, 3).map((amenity, index) => (
                       <Badge
                         key={index}
                         variant="secondary"
@@ -129,12 +129,12 @@ export function RoomTypeTable({
                         {amenity}
                       </Badge>
                     ))}
-                    {roomType.tienNghi.length > 3 && (
+                    {roomType.amenities.length > 3 && (
                       <Badge
                         variant="secondary"
                         className="bg-gray-100 text-gray-700 text-xs"
                       >
-                        +{roomType.tienNghi.length - 3}
+                        +{roomType.amenities.length - 3}
                       </Badge>
                     )}
                   </div>
@@ -154,11 +154,11 @@ export function RoomTypeTable({
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDeleteClick(roomType)}
-                      disabled={isDeleting === roomType.maLoaiPhong}
+                      disabled={isDeleting === roomType.roomTypeID}
                       className="h-8 px-3 text-error-600 hover:bg-error-50 hover:text-error-700 disabled:opacity-50"
                     >
                       <span className="w-4 h-4 mr-1">{ICONS.TRASH}</span>
-                      {isDeleting === roomType.maLoaiPhong
+                      {isDeleting === roomType.roomTypeID
                         ? "Đang xóa..."
                         : "Xóa"}
                     </Button>
@@ -193,8 +193,8 @@ export function RoomTypeTable({
                 <span className="w-5 h-5 shrink-0 mt-0.5">{ICONS.ALERT}</span>
                 <span>
                   Bạn có chắc chắn muốn xóa loại phòng{" "}
-                  <strong>{deleteConfirm.roomType?.tenLoaiPhong}</strong> (
-                  {deleteConfirm.roomType?.maLoaiPhong})?
+                  <strong>{deleteConfirm.roomType?.roomTypeName}</strong> (
+                  {deleteConfirm.roomType?.roomTypeID})?
                 </span>
               </p>
             </div>
@@ -204,19 +204,19 @@ export function RoomTypeTable({
                 <div className="flex justify-between">
                   <span className="text-gray-500">Giá:</span>
                   <span className="font-medium text-gray-900">
-                    {formatCurrency(deleteConfirm.roomType.gia)}
+                    {formatCurrency(deleteConfirm.roomType.price)}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">Sức chứa:</span>
                   <span className="font-medium text-gray-900">
-                    {deleteConfirm.roomType.sucChua} người
+                    {deleteConfirm.roomType.capacity} người
                   </span>
                 </div>
                 <div className="flex justify-between items-start">
                   <span className="text-gray-500">Tiện nghi:</span>
                   <span className="font-medium text-gray-900 text-right">
-                    {deleteConfirm.roomType.tienNghi.join(", ")}
+                    {deleteConfirm.roomType.amenities.join(", ")}
                   </span>
                 </div>
               </div>

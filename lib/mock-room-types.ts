@@ -3,25 +3,25 @@ import { RoomType } from "@/lib/types/room";
 // Mock Room Types Data
 export const mockRoomTypes: RoomType[] = [
   {
-    maLoaiPhong: "STD",
-    tenLoaiPhong: "Standard",
-    gia: 500000,
-    sucChua: 2,
-    tienNghi: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh"],
+    roomTypeID: "STD",
+    roomTypeName: "Standard",
+    price: 500000,
+    capacity: 2,
+    amenities: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh"],
   },
   {
-    maLoaiPhong: "DLX",
-    tenLoaiPhong: "Deluxe",
-    gia: 800000,
-    sucChua: 2,
-    tienNghi: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh", "Minibar", "Ban công"],
+    roomTypeID: "DLX",
+    roomTypeName: "Deluxe",
+    price: 800000,
+    capacity: 2,
+    amenities: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh", "Minibar", "Ban công"],
   },
   {
-    maLoaiPhong: "SUT",
-    tenLoaiPhong: "Suite",
-    gia: 1200000,
-    sucChua: 4,
-    tienNghi: [
+    roomTypeID: "SUT",
+    roomTypeName: "Suite",
+    price: 1200000,
+    capacity: 4,
+    amenities: [
       "WiFi",
       "Tivi",
       "Điều hòa",
@@ -33,11 +33,11 @@ export const mockRoomTypes: RoomType[] = [
     ],
   },
   {
-    maLoaiPhong: "FAM",
-    tenLoaiPhong: "Family",
-    gia: 1500000,
-    sucChua: 6,
-    tienNghi: [
+    roomTypeID: "FAM",
+    roomTypeName: "Family",
+    price: 1500000,
+    capacity: 6,
+    amenities: [
       "WiFi",
       "Tivi",
       "Điều hòa",
@@ -48,11 +48,11 @@ export const mockRoomTypes: RoomType[] = [
     ],
   },
   {
-    maLoaiPhong: "PRE",
-    tenLoaiPhong: "Presidential Suite",
-    gia: 3000000,
-    sucChua: 8,
-    tienNghi: [
+    roomTypeID: "PRE",
+    roomTypeName: "Presidential Suite",
+    price: 3000000,
+    capacity: 8,
+    amenities: [
       "WiFi",
       "Tivi 4K",
       "Điều hòa thông minh",
@@ -76,13 +76,13 @@ export async function getRoomTypes(): Promise<RoomType[]> {
 }
 
 export async function createRoomType(
-  roomType: Omit<RoomType, "maLoaiPhong">
+  roomType: Omit<RoomType, "roomTypeID">
 ): Promise<RoomType> {
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 300));
 
   // Generate unique code
-  const code = roomType.tenLoaiPhong
+  const code = roomType.roomTypeName
     .split(" ")
     .map((word) => word[0])
     .join("")
@@ -90,7 +90,7 @@ export async function createRoomType(
     .slice(0, 3);
 
   const newRoomType: RoomType = {
-    maLoaiPhong: code,
+    roomTypeID: code,
     ...roomType,
   };
 
@@ -99,13 +99,13 @@ export async function createRoomType(
 }
 
 export async function updateRoomType(
-  maLoaiPhong: string,
+  roomTypeID: string,
   updates: Partial<RoomType>
 ): Promise<RoomType> {
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 300));
 
-  const index = mockRoomTypes.findIndex((rt) => rt.maLoaiPhong === maLoaiPhong);
+  const index = mockRoomTypes.findIndex((rt) => rt.roomTypeID === roomTypeID);
   if (index === -1) {
     throw new Error("Không tìm thấy loại phòng");
   }
@@ -113,17 +113,17 @@ export async function updateRoomType(
   mockRoomTypes[index] = {
     ...mockRoomTypes[index],
     ...updates,
-    maLoaiPhong, // Keep original code
+    roomTypeID, // Keep original code
   };
 
   return mockRoomTypes[index];
 }
 
-export async function deleteRoomType(maLoaiPhong: string): Promise<void> {
+export async function deleteRoomType(roomTypeID: string): Promise<void> {
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 300));
 
-  const index = mockRoomTypes.findIndex((rt) => rt.maLoaiPhong === maLoaiPhong);
+  const index = mockRoomTypes.findIndex((rt) => rt.roomTypeID === roomTypeID);
   if (index === -1) {
     throw new Error("Không tìm thấy loại phòng");
   }
@@ -133,9 +133,9 @@ export async function deleteRoomType(maLoaiPhong: string): Promise<void> {
   mockRoomTypes.splice(index, 1);
 }
 
-export function checkRoomTypeInUse(maLoaiPhong: string): boolean {
+export function checkRoomTypeInUse(roomTypeID: string): boolean {
   // In real app, query PHONG table
   // For demo, randomly return true/false based on code
   const inUseCodes = ["STD", "DLX", "SUT"];
-  return inUseCodes.includes(maLoaiPhong);
+  return inUseCodes.includes(roomTypeID);
 }

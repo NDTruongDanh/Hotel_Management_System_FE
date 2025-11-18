@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { RoomType } from "@/lib/types/room";
 import { ICONS } from "@/src/constants/icons.enum";
 
@@ -29,15 +31,15 @@ export function RoomTypeFormModal({
   onSave,
 }: RoomTypeFormModalProps) {
   const [formData, setFormData] = useState<{
-    tenLoaiPhong: string;
-    gia: string;
-    sucChua: string;
-    tienNghi: string;
+    roomTypeName: string;
+    price: string;
+    capacity: string;
+    amenities: string;
   }>({
-    tenLoaiPhong: "",
-    gia: "",
-    sucChua: "",
-    tienNghi: "",
+    roomTypeName: "",
+    price: "",
+    capacity: "",
+    amenities: "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -48,17 +50,17 @@ export function RoomTypeFormModal({
 
     if (roomType) {
       setFormData({
-        tenLoaiPhong: roomType.tenLoaiPhong,
-        gia: roomType.gia.toString(),
-        sucChua: roomType.sucChua.toString(),
-        tienNghi: roomType.tienNghi.join(", "),
+        roomTypeName: roomType.roomTypeName,
+        price: roomType.price.toString(),
+        capacity: roomType.capacity.toString(),
+        amenities: roomType.amenities.join(", "),
       });
     } else {
       setFormData({
-        tenLoaiPhong: "",
-        gia: "",
-        sucChua: "",
-        tienNghi: "",
+        roomTypeName: "",
+        price: "",
+        capacity: "",
+        amenities: "",
       });
     }
     setErrors({});
@@ -67,22 +69,22 @@ export function RoomTypeFormModal({
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.tenLoaiPhong.trim()) {
-      newErrors.tenLoaiPhong = "Tên loại phòng không được để trống";
+    if (!formData.roomTypeName.trim()) {
+      newErrors.roomTypeName = "Tên loại phòng không được để trống";
     }
 
-    const gia = parseFloat(formData.gia);
-    if (!formData.gia.trim() || isNaN(gia) || gia <= 0) {
-      newErrors.gia = "Giá phải là số dương";
+    const price = parseFloat(formData.price);
+    if (!formData.price.trim() || isNaN(price) || price <= 0) {
+      newErrors.price = "Giá phải là số dương";
     }
 
-    const sucChua = parseInt(formData.sucChua);
-    if (!formData.sucChua.trim() || isNaN(sucChua) || sucChua <= 0) {
-      newErrors.sucChua = "Sức chứa phải là số nguyên dương";
+    const capacity = parseInt(formData.capacity);
+    if (!formData.capacity.trim() || isNaN(capacity) || capacity <= 0) {
+      newErrors.capacity = "Sức chứa phải là số nguyên dương";
     }
 
-    if (!formData.tienNghi.trim()) {
-      newErrors.tienNghi = "Tiện nghi không được để trống";
+    if (!formData.amenities.trim()) {
+      newErrors.amenities = "Tiện nghi không được để trống";
     }
 
     setErrors(newErrors);
@@ -95,17 +97,17 @@ export function RoomTypeFormModal({
     setIsSubmitting(true);
     try {
       const roomTypeData: Partial<RoomType> = {
-        tenLoaiPhong: formData.tenLoaiPhong.trim(),
-        gia: parseFloat(formData.gia),
-        sucChua: parseInt(formData.sucChua),
-        tienNghi: formData.tienNghi
-          .split(",")
+        roomTypeName: formData.roomTypeName.trim(),
+        price: parseFloat(formData.price),
+        capacity: parseInt(formData.capacity),
+        amenities: formData.amenities
+          .split(/[,\n]+/)
           .map((item) => item.trim())
           .filter((item) => item.length > 0),
       };
 
       if (roomType) {
-        roomTypeData.maLoaiPhong = roomType.maLoaiPhong;
+        roomTypeData.roomTypeID = roomType.roomTypeID;
       }
 
       await onSave(roomTypeData);
@@ -137,103 +139,132 @@ export function RoomTypeFormModal({
         <div className="grid gap-5 py-4">
           {/* Tên loại phòng */}
           <div className="grid gap-2">
-            <Label htmlFor="tenLoaiPhong" className="text-sm font-medium text-gray-700">
+            <Label
+              htmlFor="roomTypeName"
+              className="text-sm font-medium text-gray-700"
+            >
               Tên loại phòng <span className="text-error-600">*</span>
             </Label>
             <Input
-              id="tenLoaiPhong"
-              value={formData.tenLoaiPhong}
+              id="roomTypeName"
+              value={formData.roomTypeName}
               onChange={(e) =>
-                setFormData({ ...formData, tenLoaiPhong: e.target.value })
+                setFormData({ ...formData, roomTypeName: e.target.value })
               }
               placeholder="VD: Standard, Deluxe, Suite..."
-              className={`h-10 ${errors.tenLoaiPhong ? "border-error-600 focus:ring-error-500" : "border-gray-300 focus:ring-primary-blue-500"}`}
+              className={`h-10 ${
+                errors.roomTypeName
+                  ? "border-error-600 focus:ring-error-500"
+                  : "border-gray-300 focus:ring-primary-blue-500"
+              }`}
             />
-            {errors.tenLoaiPhong && (
+            {errors.roomTypeName && (
               <p className="text-xs text-error-600 flex items-center gap-1">
                 <span className="w-3 h-3">{ICONS.ALERT}</span>
-                {errors.tenLoaiPhong}
+                {errors.roomTypeName}
               </p>
             )}
           </div>
 
           {/* Giá */}
           <div className="grid gap-2">
-            <Label htmlFor="gia" className="text-sm font-medium text-gray-700">
+            <Label
+              htmlFor="price"
+              className="text-sm font-medium text-gray-700"
+            >
               Giá (VNĐ) <span className="text-error-600">*</span>
             </Label>
             <Input
-              id="gia"
+              id="price"
               type="number"
-              value={formData.gia}
-              onChange={(e) => setFormData({ ...formData, gia: e.target.value })}
+              value={formData.price}
+              onChange={(e) =>
+                setFormData({ ...formData, price: e.target.value })
+              }
               placeholder="VD: 500000"
-              className={`h-10 ${errors.gia ? "border-error-600 focus:ring-error-500" : "border-gray-300 focus:ring-primary-blue-500"}`}
+              className={`h-10 ${
+                errors.price
+                  ? "border-error-600 focus:ring-error-500"
+                  : "border-gray-300 focus:ring-primary-blue-500"
+              }`}
             />
-            {errors.gia && (
+            {errors.price && (
               <p className="text-xs text-error-600 flex items-center gap-1">
                 <span className="w-3 h-3">{ICONS.ALERT}</span>
-                {errors.gia}
+                {errors.price}
               </p>
             )}
           </div>
 
           {/* Sức chứa */}
           <div className="grid gap-2">
-            <Label htmlFor="sucChua" className="text-sm font-medium text-gray-700">
+            <Label
+              htmlFor="capacity"
+              className="text-sm font-medium text-gray-700"
+            >
               Sức chứa (người) <span className="text-error-600">*</span>
             </Label>
             <Input
-              id="sucChua"
+              id="capacity"
               type="number"
-              value={formData.sucChua}
+              value={formData.capacity}
               onChange={(e) =>
-                setFormData({ ...formData, sucChua: e.target.value })
+                setFormData({ ...formData, capacity: e.target.value })
               }
               placeholder="VD: 2"
-              className={`h-10 ${errors.sucChua ? "border-error-600 focus:ring-error-500" : "border-gray-300 focus:ring-primary-blue-500"}`}
+              className={`h-10 ${
+                errors.capacity
+                  ? "border-error-600 focus:ring-error-500"
+                  : "border-gray-300 focus:ring-primary-blue-500"
+              }`}
             />
-            {errors.sucChua && (
+            {errors.capacity && (
               <p className="text-xs text-error-600 flex items-center gap-1">
                 <span className="w-3 h-3">{ICONS.ALERT}</span>
-                {errors.sucChua}
+                {errors.capacity}
               </p>
             )}
           </div>
 
           {/* Tiện nghi */}
           <div className="grid gap-2">
-            <Label htmlFor="tienNghi" className="text-sm font-medium text-gray-700">
+            <Label
+              htmlFor="amenities"
+              className="text-sm font-medium text-gray-700"
+            >
               Tiện nghi <span className="text-error-600">*</span>
             </Label>
-            <Input
-              id="tienNghi"
-              value={formData.tienNghi}
+            <Textarea
+              id="amenities"
+              value={formData.amenities}
               onChange={(e) =>
-                setFormData({ ...formData, tienNghi: e.target.value })
+                setFormData({ ...formData, amenities: e.target.value })
               }
-              placeholder="VD: WiFi, Tivi, Điều hòa, Tủ lạnh"
-              className={`h-10 ${errors.tienNghi ? "border-error-600 focus:ring-error-500" : "border-gray-300 focus:ring-primary-blue-500"}`}
+              placeholder="VD: WiFi, Tivi, Điều hòa, Tủ lạnh\nMinibar, Ban công, Bồn tắm\nPhòng khách riêng"
+              rows={3}
+              className={`resize-none ${
+                errors.amenities
+                  ? "border-error-600 focus:ring-error-500"
+                  : "border-gray-300 focus:ring-primary-blue-500"
+              }`}
             />
             <p className="text-xs text-gray-500">
-              Nhập các tiện nghi cách nhau bằng dấu phẩy
+              Nhập các tiện nghi cách nhau bằng dấu phẩy hoặc xuống dòng
             </p>
-            {errors.tienNghi && (
+            {errors.amenities && (
               <p className="text-xs text-error-600 flex items-center gap-1">
                 <span className="w-3 h-3">{ICONS.ALERT}</span>
-                {errors.tienNghi}
+                {errors.amenities}
               </p>
             )}
           </div>
 
           {/* Submit error */}
           {errors.submit && (
-            <div className="p-3 bg-error-100 border border-error-600 rounded-md">
-              <p className="text-sm text-error-600 flex items-center gap-2">
-                <span className="w-4 h-4">{ICONS.ALERT}</span>
-                {errors.submit}
-              </p>
-            </div>
+            <Alert variant="destructive">
+              <span className="w-4 h-4">{ICONS.ALERT}</span>
+              <AlertDescription>{errors.submit}</AlertDescription>
+            </Alert>
           )}
         </div>
 
