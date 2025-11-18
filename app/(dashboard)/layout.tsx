@@ -14,7 +14,7 @@ export default function DashboardLayout({
       <SidebarInset className="flex flex-col">
         <Navbar />
         <main className="flex-1 overflow-auto bg-gray-50">
-          <div className="p-6">{children}</div>
+          <div className="p-6 max-w-full overflow-hidden">{children}</div>
         </main>
       </SidebarInset>
     </SidebarProvider>
