@@ -381,3 +381,43 @@
   5. Kết quả được hiển thị trong "Khu vực hiển thị" dưới dạng bảng và biểu đồ.
 
   6. **Sự kiện (Xuất file):** Quản lý nhấn "Xuất Excel". Hệ thống tạo file Excel chứa dữ liệu báo cáo và cho phép người dùng tải về (FR-036).
+
+#### **2.11. Màn hình Quản lý Khách hàng (Customer Management)**
+
+- **Mục đích chính:** Lưu trữ và quản lý thông tin khách hàng, hỗ trợ tra cứu lịch sử đặt phòng và cung cấp trải nghiệm cá nhân hóa cho khách quen.
+
+- **Luồng tham chiếu (Use Case):** Liên quan đến UC1.3 (Đặt phòng), UC1.4 (Check-in). Tham chiếu yêu cầu chức năng quản lý khách hàng (FR-031, FR-032, FR-033).
+
+- **Các Control chính:**
+
+  - Bảng danh sách khách hàng (Customer Table): Hiển thị CustomerID, CustomerName, phoneNumber, Email, identityCard, Address.
+  - Thanh tìm kiếm (Search Bar): Tìm kiếm theo tên, số điện thoại, email, hoặc số CCCD (identityCard).
+  - Button "Thêm khách hàng mới".
+  - Các controls trên mỗi hàng: Button "Xem chi tiết", Button "Sửa", Button "Xóa".
+  - Bộ lọc (Filters): Lọc theo "Loại khách hàng" (Cá nhân/Doanh nghiệp), "Khách VIP".
+
+- **Màn hình con / Component phụ:**
+
+  - **Form Thêm/Sửa Khách hàng (Modal):** Cửa sổ popup để nhập/chỉnh sửa thông tin khách hàng (CustomerName, phoneNumber, Email, identityCard, Address, Nationality). Yêu cầu validate số điện thoại và email (FR-032).
+  - **Modal Chi tiết Khách hàng:** Hiển thị thông tin đầy đủ của khách hàng và lịch sử đặt phòng/lưu trú (FR-033). Bao gồm danh sách các lần đặt phòng trước đó với trạng thái và tổng chi tiêu.
+  - **Hộp thoại xác nhận (Confirmation Dialog):** Hiển thị khi nhấn "Xóa" khách hàng.
+
+- **Mô tả sử dụng và xử lý sự kiện:**
+
+  1. Lễ tân/Quản lý truy cập màn hình để quản lý thông tin khách hàng.
+
+  2. **Sự kiện (Tìm kiếm):** Người dùng nhập số điện thoại hoặc tên khách vào thanh tìm kiếm. Hệ thống tự động lọc danh sách khách hàng phù hợp (FR-031).
+
+  3. **Sự kiện (Thêm khách hàng):** Nhấn "Thêm khách hàng mới". Form modal xuất hiện. Lễ tân nhập thông tin khách hàng.
+
+  4. **Hệ thống xử lý:** Khi nhấn "Lưu", hệ thống kiểm tra tính hợp lệ (số điện thoại không trùng, email đúng định dạng, số CCCD hợp lệ) (FR-032). Nếu hợp lệ, tạo bản ghi KHACHHANG mới và trả về MaKH.
+
+  5. **Sự kiện (Xem chi tiết):** Nhấn "Xem chi tiết" trên một khách hàng. Modal Chi tiết xuất hiện, hiển thị thông tin cá nhân và lịch sử đặt phòng (lấy từ DATPHONG và PHIEUTHUEPHONG) (FR-033).
+
+  6. **Sự kiện (Sửa):** Nhấn "Sửa". Form modal với thông tin hiện tại xuất hiện. Lễ tân chỉnh sửa (ví dụ: cập nhật số điện thoại mới). Khi "Lưu", hệ thống cập nhật bản ghi KHACHHANG.
+
+  7. **Sự kiện (Xóa):** Nhấn "Xóa". Hộp thoại xác nhận hiện lên.
+
+  8. **Xử lý ràng buộc:** Hệ thống kiểm tra xem khách hàng này có đặt phòng đang hoạt động hoặc lịch sử giao dịch không. Nếu có, hệ thống thông báo "Không thể xóa khách hàng có lịch sử giao dịch. Chỉ có thể vô hiệu hóa." Thực hiện xóa mềm (soft delete) bằng cách đánh dấu trạng thái thay vì xóa vật lý.
+
+  9. **Tích hợp với Đặt phòng:** Khi tạo đặt phòng mới (màn hình 2.5), Lễ tân có thể tìm kiếm khách hàng hiện có hoặc nhanh chóng thêm mới từ form đặt phòng. Hệ thống tự động điền thông tin khách hàng vào các trường liên quan.
