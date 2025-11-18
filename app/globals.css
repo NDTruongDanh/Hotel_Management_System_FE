@@ -38,6 +38,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* Primary Colors - Blue */
+  --primary-blue-700: #1d4ed8;
   --primary-blue-600: #1e40af;
   --primary-blue-500: #3b82f6;
   --primary-blue-400: #60a5fa;
@@ -154,6 +155,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Custom Color Palette */
+  --color-primary-700: var(--primary-blue-700);
   --color-primary-600: var(--primary-blue-600);
   --color-primary-500: var(--primary-blue-500);
   --color-primary-400: var(--primary-blue-400);
@@ -196,5 +198,16 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Text selection colors */
+  ::selection {
+    background-color: var(--primary-blue-500);
+    color: var(--gray-900);
+  }
+
+  ::-moz-selection {
+    background-color: var(--primary-blue-500);
+    color: var(--gray-900);
   }
 }
