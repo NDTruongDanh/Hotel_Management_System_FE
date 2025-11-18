@@ -102,7 +102,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </div>
             <div className="flex flex-col overflow-hidden group-data-[collapsible=icon]:hidden">
               <span className="text-base font-semibold text-gray-900 truncate">
-                Hotel System
+                UIT Hotel System
               </span>
               <span className="text-xs text-gray-500 truncate">
                 Quản lý khách sạn
