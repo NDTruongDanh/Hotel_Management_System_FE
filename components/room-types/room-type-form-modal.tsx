@@ -268,7 +268,7 @@ export function RoomTypeFormModal({
           )}
         </div>
 
-        <DialogFooter className="gap-2">
+        <DialogFooter>
           <Button
             type="button"
             variant="outline"
@@ -282,7 +282,7 @@ export function RoomTypeFormModal({
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="h-10 px-5 bg-primary-blue-600 text-white hover:bg-primary-blue-700"
+            className="h-10 px-5 bg-primary-600 text-white hover:bg-primary-500"
           >
             {isSubmitting ? "Đang lưu..." : "Lưu"}
           </Button>
