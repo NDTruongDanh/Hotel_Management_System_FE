@@ -197,4 +197,15 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Text selection colors */
+  ::selection {
+    background-color: var(--primary-blue-500);
+    color: var(--gray-900);
+  }
+
+  ::-moz-selection {
+    background-color: var(--primary-blue-500);
+    color: var(--gray-900);
+  }
 }
