@@ -3,6 +3,8 @@
 import { useInvoicePrint } from "@/hooks/use-invoice-print";
 import { InvoicePrint } from "@/components/payments/invoice-print";
 
+export const dynamic = "force-dynamic";
+
 export default function PrintInvoicePage() {
   const { receiptID, summary, goBack, reprint } = useInvoicePrint();
 
