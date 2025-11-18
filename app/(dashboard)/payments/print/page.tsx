@@ -2,6 +2,7 @@
 
 import { useInvoicePrint } from "@/hooks/use-invoice-print";
 import { InvoicePrint } from "@/components/payments/invoice-print";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -28,5 +29,9 @@ export default function PrintInvoicePage() {
       </div>
     );
   }
-  return <InvoicePrint summary={summary} onBack={goBack} onPrint={reprint} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InvoicePrint summary={summary} onBack={goBack} onPrint={reprint} />
+    </Suspense>
+  );
 }
