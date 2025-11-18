@@ -1,11 +1,4 @@
-export interface User {
-  employeeId: string;
-  fullName: string;
-  email: string;
-  password: string;
-  role: "Admin" | "Quản lý" | "Lễ tân";
-  phoneNumber?: string;
-}
+import { User } from "../lib/types/auth";
 
 // Mock users for testing
 export const mockUsers: User[] = [
