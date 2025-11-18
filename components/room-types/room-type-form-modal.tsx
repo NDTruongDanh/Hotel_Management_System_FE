@@ -160,7 +160,6 @@ export function RoomTypeFormModal({
             />
             {errors.roomTypeName && (
               <p className="text-xs text-error-600 flex items-center gap-1">
-                <span className="w-3 h-3">{ICONS.ALERT}</span>
                 {errors.roomTypeName}
               </p>
             )}
@@ -190,7 +189,6 @@ export function RoomTypeFormModal({
             />
             {errors.price && (
               <p className="text-xs text-error-600 flex items-center gap-1">
-                <span className="w-3 h-3">{ICONS.ALERT}</span>
                 {errors.price}
               </p>
             )}
@@ -220,7 +218,6 @@ export function RoomTypeFormModal({
             />
             {errors.capacity && (
               <p className="text-xs text-error-600 flex items-center gap-1">
-                <span className="w-3 h-3">{ICONS.ALERT}</span>
                 {errors.capacity}
               </p>
             )}
@@ -253,7 +250,6 @@ export function RoomTypeFormModal({
             </p>
             {errors.amenities && (
               <p className="text-xs text-error-600 flex items-center gap-1">
-                <span className="w-3 h-3">{ICONS.ALERT}</span>
                 {errors.amenities}
               </p>
             )}
