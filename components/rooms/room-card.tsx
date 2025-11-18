@@ -39,20 +39,20 @@ export function RoomCard({
     <Card
       className={cn(
         "hover:shadow-md transition-shadow border-l-4",
-        statusBorderColor[room.trangThaiPhong]
+        statusBorderColor[room.roomStatus]
       )}
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <CardTitle className="text-lg font-semibold text-gray-900">
-              {room.tenPhong}
+              {room.roomName}
             </CardTitle>
             <p className="text-sm text-gray-500">
-              {room.loaiPhong.tenLoaiPhong}
+              {room.roomType.roomTypeName}
             </p>
           </div>
-          <RoomStatusBadge status={room.trangThaiPhong} />
+          <RoomStatusBadge status={room.roomStatus} />
         </div>
       </CardHeader>
 
@@ -61,16 +61,16 @@ export function RoomCard({
         <div className="space-y-2 text-sm">
           <div className="flex items-center gap-2 text-gray-700">
             <span className="text-gray-500">{ICONS.BED_DOUBLE}</span>
-            <span>Sức chứa: {room.loaiPhong.sucChua} người</span>
+            <span>Sức chứa: {room.roomType.capacity} người</span>
           </div>
           <div className="flex items-center gap-2 text-gray-700">
             <span className="text-gray-500">{ICONS.HOME}</span>
-            <span>Tầng {room.tang}</span>
+            <span>Tầng {room.floor}</span>
           </div>
           <div className="flex items-center gap-2 text-gray-700">
             <span className="text-gray-500">{ICONS.DOLLAR_SIGN}</span>
             <span className="font-semibold text-primary-600">
-              {formatCurrency(room.loaiPhong.gia)}
+              {formatCurrency(room.roomType.price)}
             </span>
           </div>
         </div>
@@ -79,7 +79,7 @@ export function RoomCard({
         <div className="space-y-1">
           <p className="text-xs font-medium text-gray-600">Tiện nghi:</p>
           <div className="flex flex-wrap gap-1">
-            {room.loaiPhong.tienNghi.slice(0, 3).map((amenity) => (
+            {room.roomType.amenities.slice(0, 3).map((amenity) => (
               <span
                 key={amenity}
                 className="text-xs px-2 py-0.5 bg-gray-100 text-gray-700 rounded"
@@ -87,9 +87,9 @@ export function RoomCard({
                 {amenity}
               </span>
             ))}
-            {room.loaiPhong.tienNghi.length > 3 && (
+            {room.roomType.amenities.length > 3 && (
               <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-700 rounded">
-                +{room.loaiPhong.tienNghi.length - 3} khác
+                +{room.roomType.amenities.length - 3} khác
               </span>
             )}
           </div>
@@ -126,7 +126,7 @@ export function RoomCard({
             <div className="grid grid-cols-2 gap-2">
               {(["Trống", "Đang dọn dẹp", "Bảo trì"] as RoomStatus[]).map(
                 (status) =>
-                  room.trangThaiPhong !== status && (
+                  room.roomStatus !== status && (
                     <Button
                       key={status}
                       variant="outline"

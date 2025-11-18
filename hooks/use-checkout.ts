@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type {
   RentalReceipt,
   CheckoutSummary,
@@ -13,13 +13,10 @@ import {
 
 export function useCheckOut() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<RentalReceipt[]>([]);
-
-  // Load all active rentals by default on mount
-  useEffect(() => {
-    const allRentals = searchActiveRentals("");
-    setResults(allRentals);
-  }, []);
+  // Initialize with all active rentals on first render
+  const [results, setResults] = useState<RentalReceipt[]>(() =>
+    searchActiveRentals("")
+  );
   const [selectedCheckout, setSelectedCheckout] =
     useState<CheckoutSummary | null>(null);
   const [showAddServiceModal, setShowAddServiceModal] = useState(false);

@@ -29,23 +29,23 @@ export function useRoomFilters({
     return rooms.filter((room) => {
       // Search filter
       const matchesSearch =
-        room.tenPhong.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        room.maPhong.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        room.loaiPhong.tenLoaiPhong
+        room.roomName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        room.roomID.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        room.roomType.roomTypeName
           .toLowerCase()
           .includes(searchQuery.toLowerCase());
 
       // Status filter
       const matchesStatus =
-        filters.status === "Tất cả" || room.trangThaiPhong === filters.status;
+        filters.status === "Tất cả" || room.roomStatus === filters.status;
 
       // Room type filter
       const matchesRoomType =
-        filters.roomType === "Tất cả" || room.maLoaiPhong === filters.roomType;
+        filters.roomType === "Tất cả" || room.roomTypeID === filters.roomType;
 
       // Floor filter
       const matchesFloor =
-        filters.floor === "Tất cả" || room.tang === filters.floor;
+        filters.floor === "Tất cả" || room.floor === filters.floor;
 
       return matchesSearch && matchesStatus && matchesRoomType && matchesFloor;
     });

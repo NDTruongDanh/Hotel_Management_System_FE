@@ -1,17 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { Reservation } from "@/lib/types/reservation";
 import type { CheckInFormData } from "@/lib/types/checkin-checkout";
 import { searchReservations } from "@/lib/mock-checkin-checkout";
 
 export function useCheckIn() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Reservation[]>([]);
-
-  // Load all reservations by default on mount
-  useEffect(() => {
-    const allReservations = searchReservations("");
-    setResults(allReservations);
-  }, []);
+  // Initialize with all reservations on first render
+  const [results, setResults] = useState<Reservation[]>(() =>
+    searchReservations("")
+  );
   const [selectedReservation, setSelectedReservation] =
     useState<Reservation | null>(null);
   const [showModal, setShowModal] = useState(false);

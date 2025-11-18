@@ -37,17 +37,17 @@ export function RoomFormModal({
   onSave,
 }: RoomFormModalProps) {
   const [formData, setFormData] = useState<{
-    maPhong: string;
-    tenPhong: string;
-    maLoaiPhong: string;
-    trangThaiPhong: RoomStatus;
-    tang: number;
+    roomID: string;
+    roomName: string;
+    roomTypeID: string;
+    roomStatus: RoomStatus;
+    floor: number;
   }>({
-    maPhong: "",
-    tenPhong: "",
-    maLoaiPhong: "",
-    trangThaiPhong: "Trống",
-    tang: 1,
+    roomID: "",
+    roomName: "",
+    roomTypeID: "",
+    roomStatus: "Trống",
+    floor: 1,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -57,19 +57,19 @@ export function RoomFormModal({
 
     if (room) {
       setFormData({
-        maPhong: room.maPhong,
-        tenPhong: room.tenPhong,
-        maLoaiPhong: room.maLoaiPhong,
-        trangThaiPhong: room.trangThaiPhong,
-        tang: room.tang,
+        roomID: room.roomID,
+        roomName: room.roomName,
+        roomTypeID: room.roomTypeID,
+        roomStatus: room.roomStatus,
+        floor: room.floor,
       });
     } else {
       setFormData({
-        maPhong: "",
-        tenPhong: "",
-        maLoaiPhong: roomTypes[0]?.maLoaiPhong || "",
-        trangThaiPhong: "Trống",
-        tang: 1,
+        roomID: "",
+        roomName: "",
+        roomTypeID: roomTypes[0]?.roomTypeID || "",
+        roomStatus: "Trống",
+        floor: 1,
       });
     }
     setErrors({});
@@ -79,17 +79,17 @@ export function RoomFormModal({
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.maPhong.trim()) {
-      newErrors.maPhong = "Mã phòng không được để trống";
+    if (!formData.roomID.trim()) {
+      newErrors.roomID = "Mã phòng không được để trống";
     }
-    if (!formData.tenPhong.trim()) {
-      newErrors.tenPhong = "Tên phòng không được để trống";
+    if (!formData.roomName.trim()) {
+      newErrors.roomName = "Tên phòng không được để trống";
     }
-    if (!formData.maLoaiPhong) {
-      newErrors.maLoaiPhong = "Vui lòng chọn loại phòng";
+    if (!formData.roomTypeID) {
+      newErrors.roomTypeID = "Vui lòng chọn loại phòng";
     }
-    if (formData.tang < 1) {
-      newErrors.tang = "Tầng phải lớn hơn 0";
+    if (formData.floor < 1) {
+      newErrors.floor = "Tầng phải lớn hơn 0";
     }
 
     setErrors(newErrors);
@@ -100,18 +100,18 @@ export function RoomFormModal({
     if (!validateForm()) return;
 
     const selectedRoomType = roomTypes.find(
-      (rt) => rt.maLoaiPhong === formData.maLoaiPhong
+      (rt) => rt.roomTypeID === formData.roomTypeID
     );
 
     if (!selectedRoomType) return;
 
     const roomData: Partial<Room> = {
-      maPhong: formData.maPhong,
-      tenPhong: formData.tenPhong,
-      maLoaiPhong: formData.maLoaiPhong,
-      loaiPhong: selectedRoomType,
-      trangThaiPhong: formData.trangThaiPhong,
-      tang: formData.tang,
+      roomID: formData.roomID,
+      roomName: formData.roomName,
+      roomTypeID: formData.roomTypeID,
+      roomType: selectedRoomType,
+      roomStatus: formData.roomStatus,
+      floor: formData.floor,
     };
 
     onSave(roomData);
@@ -134,104 +134,107 @@ export function RoomFormModal({
           {/* Room Code */}
           <div className="space-y-2">
             <Label
-              htmlFor="maPhong"
+              htmlFor="roomID"
               className="text-sm font-medium text-gray-700"
             >
               Mã phòng <span className="text-red-500">*</span>
             </Label>
             <Input
-              id="maPhong"
+              id="roomID"
               placeholder="Ví dụ: 101, 201A"
-              value={formData.maPhong}
+              value={formData.roomID}
               onChange={(e) =>
-                setFormData({ ...formData, maPhong: e.target.value })
+                setFormData({ ...formData, roomID: e.target.value })
               }
               disabled={!!room}
-              className={errors.maPhong ? "border-red-500" : ""}
+              className={errors.roomID ? "border-red-500" : ""}
             />
-            {errors.maPhong && (
-              <p className="text-xs text-red-500">{errors.maPhong}</p>
+            {errors.roomID && (
+              <p className="text-xs text-red-500">{errors.roomID}</p>
             )}
           </div>
 
           {/* Room Name */}
           <div className="space-y-2">
             <Label
-              htmlFor="tenPhong"
+              htmlFor="roomName"
               className="text-sm font-medium text-gray-700"
             >
               Tên phòng <span className="text-red-500">*</span>
             </Label>
             <Input
-              id="tenPhong"
+              id="roomName"
               placeholder="Ví dụ: Phòng 101"
-              value={formData.tenPhong}
+              value={formData.roomName}
               onChange={(e) =>
-                setFormData({ ...formData, tenPhong: e.target.value })
+                setFormData({ ...formData, roomName: e.target.value })
               }
-              className={errors.tenPhong ? "border-red-500" : ""}
+              className={errors.roomName ? "border-red-500" : ""}
             />
-            {errors.tenPhong && (
-              <p className="text-xs text-red-500">{errors.tenPhong}</p>
+            {errors.roomName && (
+              <p className="text-xs text-red-500">{errors.roomName}</p>
             )}
           </div>
 
           {/* Room Type */}
           <div className="space-y-2">
             <Label
-              htmlFor="maLoaiPhong"
+              htmlFor="roomTypeID"
               className="text-sm font-medium text-gray-700"
             >
               Loại phòng <span className="text-red-500">*</span>
             </Label>
             <Select
-              value={formData.maLoaiPhong}
+              value={formData.roomTypeID}
               onValueChange={(value) =>
-                setFormData({ ...formData, maLoaiPhong: value })
+                setFormData({ ...formData, roomTypeID: value })
               }
             >
               <SelectTrigger
-                className={errors.maLoaiPhong ? "border-red-500" : ""}
+                className={errors.roomTypeID ? "border-red-500" : ""}
               >
                 <SelectValue placeholder="Chọn loại phòng" />
               </SelectTrigger>
               <SelectContent>
                 {roomTypes.map((type) => (
-                  <SelectItem key={type.maLoaiPhong} value={type.maLoaiPhong}>
-                    {type.tenLoaiPhong} -{" "}
+                  <SelectItem key={type.roomTypeID} value={type.roomTypeID}>
+                    {type.roomTypeName} -{" "}
                     {new Intl.NumberFormat("vi-VN", {
                       style: "currency",
                       currency: "VND",
-                    }).format(type.gia)}
+                    }).format(type.price)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            {errors.maLoaiPhong && (
-              <p className="text-xs text-red-500">{errors.maLoaiPhong}</p>
+            {errors.roomTypeID && (
+              <p className="text-xs text-red-500">{errors.roomTypeID}</p>
             )}
           </div>
 
           {/* Floor */}
           <div className="space-y-2">
-            <Label htmlFor="tang" className="text-sm font-medium text-gray-700">
+            <Label
+              htmlFor="floor"
+              className="text-sm font-medium text-gray-700"
+            >
               Tầng <span className="text-red-500">*</span>
             </Label>
             <Input
-              id="tang"
+              id="floor"
               type="number"
               min="1"
-              value={formData.tang}
+              value={formData.floor}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  tang: parseInt(e.target.value) || 1,
+                  floor: parseInt(e.target.value) || 1,
                 })
               }
-              className={errors.tang ? "border-red-500" : ""}
+              className={errors.floor ? "border-red-500" : ""}
             />
-            {errors.tang && (
-              <p className="text-xs text-red-500">{errors.tang}</p>
+            {errors.floor && (
+              <p className="text-xs text-red-500">{errors.floor}</p>
             )}
           </div>
 
@@ -239,17 +242,17 @@ export function RoomFormModal({
           {room && (
             <div className="space-y-2">
               <Label
-                htmlFor="trangThaiPhong"
+                htmlFor="roomStatus"
                 className="text-sm font-medium text-gray-700"
               >
                 Trạng thái
               </Label>
               <Select
-                value={formData.trangThaiPhong}
+                value={formData.roomStatus}
                 onValueChange={(value) =>
                   setFormData({
                     ...formData,
-                    trangThaiPhong: value as RoomStatus,
+                    roomStatus: value as RoomStatus,
                   })
                 }
               >
