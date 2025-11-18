@@ -1,6 +1,8 @@
 import { Role } from "@/lib/types/employee";
 
-export function useRoleManagement() {
+export function useRoleManagement(
+  setRoles: React.Dispatch<React.SetStateAction<Role[]>>
+) {
   const updateRolePermissions = async (
     roleId: string,
     permissionIds: string[]
@@ -9,12 +11,17 @@ export function useRoleManagement() {
       // Mock API call - replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      // In a real implementation, this would update the backend
-      // For now, we'll just log the change
-      console.log(`Updated role ${roleId} with permissions:`, permissionIds);
+      // Update the roles state with new permissions
+      setRoles((prevRoles) =>
+        prevRoles.map((role) =>
+          role.roleId === roleId
+            ? { ...role, permissions: permissionIds }
+            : role
+        )
+      );
 
-      // The mockRoles would need to be updated through a state management solution
-      // or refetched from the API
+      // In a real implementation, this would update the backend
+      console.log(`Updated role ${roleId} with permissions:`, permissionIds);
     } catch (error) {
       console.error("Error updating role permissions:", error);
       throw error;

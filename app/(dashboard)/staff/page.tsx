@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   EmployeeFormModal,
@@ -13,8 +13,10 @@ import {
 import { useStaffPage } from "@/hooks/use-staff-page";
 import { useRoleManagement } from "@/hooks/use-role-management";
 import { mockRoles, mockPermissions } from "@/lib/mock-employees";
+import { Role } from "@/lib/types/employee";
 
 export default function StaffPage() {
+  const [roles, setRoles] = useState<Role[]>(mockRoles);
   const {
     employees,
     filteredEmployees,
@@ -42,7 +44,7 @@ export default function StaffPage() {
     handleDeactivate,
   } = useStaffPage();
 
-  const { updateRolePermissions } = useRoleManagement();
+  const { updateRolePermissions } = useRoleManagement(setRoles);
 
   useEffect(() => {
     loadEmployees();
@@ -95,7 +97,7 @@ export default function StaffPage() {
         {/* Roles Tab */}
         <TabsContent value="roles" className="mt-6">
           <RoleManagement
-            roles={mockRoles}
+            roles={roles}
             permissions={mockPermissions}
             onUpdateRolePermissions={updateRolePermissions}
           />
