@@ -63,6 +63,10 @@ export async function mockLogin(
     // Store user in sessionStorage (for mock purposes)
     if (typeof window !== "undefined") {
       sessionStorage.setItem("currentUser", JSON.stringify(user));
+      // Set auth cookie for middleware
+      document.cookie = `auth-token=${user.employeeId}; path=/; max-age=${
+        60 * 60 * 24 * 7
+      }`; // 7 days
     }
 
     return {
@@ -100,5 +104,7 @@ export function getCurrentUser(): User | null {
 export function mockLogout(): void {
   if (typeof window !== "undefined") {
     sessionStorage.removeItem("currentUser");
+    // Clear auth cookie
+    document.cookie = "auth-token=; path=/; max-age=0";
   }
 }
