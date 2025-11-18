@@ -9,6 +9,7 @@ import { CheckOutResultsTable } from "@/components/checkin-checkout/check-out-re
 import { CheckOutDetails } from "@/components/checkin-checkout/check-out-details";
 import { AddServiceModal } from "@/components/checkin-checkout/add-service-modal";
 import { AddPenaltyModal } from "@/components/checkin-checkout/add-penalty-modal";
+import { PaymentModal } from "@/components/payments/payment-modal";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ICONS } from "@/src/constants/icons.enum";
 import { useCheckIn } from "@/hooks/use-checkin";
@@ -52,8 +53,14 @@ export default function CheckinCheckoutPage() {
   };
 
   const handleCompleteCheckout = () => {
-    const { confirmed, roomName } = checkOut.handleCompleteCheckout();
-    if (confirmed) {
+    checkOut.handleCompleteCheckout();
+  };
+
+  const handleConfirmPayment = (
+    method: Parameters<typeof checkOut.handleConfirmPayment>[0]
+  ) => {
+    const roomName = checkOut.handleConfirmPayment(method);
+    if (roomName) {
       notification.showSuccess(`Đã hoàn tất check-out cho phòng ${roomName}!`);
     }
   };
@@ -146,6 +153,13 @@ export default function CheckinCheckoutPage() {
         open={checkOut.showAddPenaltyModal}
         onOpenChange={checkOut.setShowAddPenaltyModal}
         onConfirm={handleAddPenalty}
+      />
+
+      <PaymentModal
+        open={checkOut.showPaymentModal}
+        onOpenChange={checkOut.setShowPaymentModal}
+        summary={checkOut.selectedCheckout}
+        onConfirm={handleConfirmPayment}
       />
     </div>
   );
