@@ -56,7 +56,7 @@ export default function RoomsPage() {
         `Bạn có chắc chắn muốn xóa ${room.roomName}?\n\nLưu ý: Nên thực hiện xóa mềm thay vì xóa hoàn toàn.`
       )
     ) {
-      setRooms((prev) => prev.filter((r) => r.roomCode !== room.roomCode));
+      setRooms((prev) => prev.filter((r) => r.roomID !== room.roomID));
     }
   };
 
@@ -74,7 +74,7 @@ export default function RoomsPage() {
 
     setRooms((prev) =>
       prev.map((r) =>
-        r.roomCode === room.roomCode ? { ...r, trangThaiPhong: newStatus } : r
+        r.roomID === room.roomID ? { ...r, trangThaiPhong: newStatus } : r
       )
     );
   };
@@ -84,14 +84,12 @@ export default function RoomsPage() {
       // Update existing room
       setRooms((prev) =>
         prev.map((r) =>
-          r.roomCode === editingRoom.roomCode
-            ? { ...r, ...(roomData as Room) }
-            : r
+          r.roomID === editingRoom.roomID ? { ...r, ...(roomData as Room) } : r
         )
       );
     } else {
       // Add new room
-      if (rooms.find((r) => r.roomCode === roomData.roomCode)) {
+      if (rooms.find((r) => r.roomID === roomData.roomID)) {
         alert("Mã phòng đã tồn tại. Vui lòng chọn mã khác.");
         return;
       }
@@ -216,7 +214,7 @@ export default function RoomsPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
           {filteredRooms.map((room) => (
             <RoomCard
-              key={room.roomCode}
+              key={room.roomID}
               room={room}
               onEdit={handleEditRoom}
               onDelete={handleDeleteRoom}

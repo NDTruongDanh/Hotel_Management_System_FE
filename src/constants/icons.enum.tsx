@@ -38,6 +38,10 @@ import {
   BarChart3,
   ClipboardList,
   UserCog,
+  CalendarDays,
+  CalendarCheck,
+  XCircle,
+  Save,
 } from "lucide-react";
 
 export const ICONS = {
@@ -80,4 +84,8 @@ export const ICONS = {
   BAR_CHART: <BarChart3 />,
   CLIPBOARD_LIST: <ClipboardList />,
   USER_COG: <UserCog />,
+  CALENDAR_DAYS: <CalendarDays />,
+  CALENDAR_CHECK: <CalendarCheck />,
+  X_CIRCLE: <XCircle />,
+  SAVE: <Save />,
 };

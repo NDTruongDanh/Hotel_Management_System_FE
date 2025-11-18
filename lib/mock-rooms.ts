@@ -3,25 +3,25 @@ import { Room, RoomType } from "@/lib/types/room";
 // Mock Room Types
 export const mockRoomTypes: RoomType[] = [
   {
-    maLoaiPhong: "STD",
-    tenLoaiPhong: "Standard",
-    gia: 500000,
-    sucChua: 2,
-    tienNghi: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh"],
+    roomTypeID: "STD",
+    roomTypeName: "Standard",
+    price: 500000,
+    capacity: 2,
+    amenities: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh"],
   },
   {
-    maLoaiPhong: "DLX",
-    tenLoaiPhong: "Deluxe",
-    gia: 800000,
-    sucChua: 2,
-    tienNghi: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh", "Minibar", "Ban công"],
+    roomTypeID: "DLX",
+    roomTypeName: "Deluxe",
+    price: 800000,
+    capacity: 2,
+    amenities: ["WiFi", "Tivi", "Điều hòa", "Tủ lạnh", "Minibar", "Ban công"],
   },
   {
-    maLoaiPhong: "SUT",
-    tenLoaiPhong: "Suite",
-    gia: 1200000,
-    sucChua: 4,
-    tienNghi: [
+    roomTypeID: "SUT",
+    roomTypeName: "Suite",
+    price: 1200000,
+    capacity: 4,
+    amenities: [
       "WiFi",
       "Tivi",
       "Điều hòa",
@@ -33,11 +33,11 @@ export const mockRoomTypes: RoomType[] = [
     ],
   },
   {
-    maLoaiPhong: "FAM",
-    tenLoaiPhong: "Family",
-    gia: 1500000,
-    sucChua: 6,
-    tienNghi: [
+    roomTypeID: "FAM",
+    roomTypeName: "Family",
+    price: 1500000,
+    capacity: 6,
+    amenities: [
       "WiFi",
       "Tivi",
       "Điều hòa",
@@ -53,184 +53,180 @@ export const mockRoomTypes: RoomType[] = [
 export const mockRooms: Room[] = [
   // Floor 1 - Standard Rooms
   {
-    maPhong: "101",
-    tenPhong: "Phòng 101",
-    maLoaiPhong: "STD",
-    loaiPhong: mockRoomTypes[0],
-    trangThaiPhong: "Trống",
-    tang: 1,
+    roomID: "101",
+    roomName: "Phòng 101",
+    roomTypeID: "STD",
+    roomType: mockRoomTypes[0],
+    roomStatus: "Trống",
+    floor: 1,
   },
   {
-    maPhong: "102",
-    tenPhong: "Phòng 102",
-    maLoaiPhong: "STD",
-    loaiPhong: mockRoomTypes[0],
-    trangThaiPhong: "Đang thuê",
-    tang: 1,
+    roomID: "102",
+    roomName: "Phòng 102",
+    roomTypeID: "STD",
+    roomType: mockRoomTypes[0],
+    roomStatus: "Đang thuê",
+    floor: 1,
   },
   {
-    maPhong: "103",
-    tenPhong: "Phòng 103",
-    maLoaiPhong: "STD",
-    loaiPhong: mockRoomTypes[0],
-    trangThaiPhong: "Đang dọn dẹp",
-    tang: 1,
+    roomID: "103",
+    roomName: "Phòng 103",
+    roomTypeID: "STD",
+    roomType: mockRoomTypes[0],
+    roomStatus: "Đang dọn dẹp",
+    floor: 1,
   },
   {
-    maPhong: "104",
-    tenPhong: "Phòng 104",
-    maLoaiPhong: "STD",
-    loaiPhong: mockRoomTypes[0],
-    trangThaiPhong: "Trống",
-    tang: 1,
+    roomID: "104",
+    roomName: "Phòng 104",
+    roomTypeID: "STD",
+    roomType: mockRoomTypes[0],
+    roomStatus: "Trống",
+    floor: 1,
   },
   {
-    maPhong: "105",
-    tenPhong: "Phòng 105",
-    maLoaiPhong: "DLX",
-    loaiPhong: mockRoomTypes[1],
-    trangThaiPhong: "Bảo trì",
-    tang: 1,
+    roomID: "105",
+    roomName: "Phòng 105",
+    roomTypeID: "DLX",
+    roomType: mockRoomTypes[1],
+    roomStatus: "Bảo trì",
+    floor: 1,
   },
 
   // Floor 2 - Deluxe Rooms
   {
-    maPhong: "201",
-    tenPhong: "Phòng 201",
-    maLoaiPhong: "DLX",
-    loaiPhong: mockRoomTypes[1],
-    trangThaiPhong: "Đang thuê",
-    tang: 2,
+    roomID: "201",
+    roomName: "Phòng 201",
+    roomTypeID: "DLX",
+    roomType: mockRoomTypes[1],
+    roomStatus: "Đang thuê",
+    floor: 2,
   },
   {
-    maPhong: "202",
-    tenPhong: "Phòng 202",
-    maLoaiPhong: "DLX",
-    loaiPhong: mockRoomTypes[1],
-    trangThaiPhong: "Trống",
-    tang: 2,
+    roomID: "202",
+    roomName: "Phòng 202",
+    roomTypeID: "DLX",
+    roomType: mockRoomTypes[1],
+    roomStatus: "Trống",
+    floor: 2,
   },
   {
-    maPhong: "203",
-    tenPhong: "Phòng 203",
-    maLoaiPhong: "DLX",
-    loaiPhong: mockRoomTypes[1],
-    trangThaiPhong: "Đang thuê",
-    tang: 2,
+    roomID: "203",
+    roomName: "Phòng 203",
+    roomTypeID: "DLX",
+    roomType: mockRoomTypes[1],
+    roomStatus: "Đang thuê",
+    floor: 2,
   },
   {
-    maPhong: "204",
-    tenPhong: "Phòng 204",
-    maLoaiPhong: "DLX",
-    loaiPhong: mockRoomTypes[1],
-    trangThaiPhong: "Trống",
-    tang: 2,
+    roomID: "204",
+    roomName: "Phòng 204",
+    roomTypeID: "DLX",
+    roomType: mockRoomTypes[1],
+    roomStatus: "Trống",
+    floor: 2,
   },
   {
-    maPhong: "205",
-    tenPhong: "Phòng 205",
-    maLoaiPhong: "DLX",
-    loaiPhong: mockRoomTypes[1],
-    trangThaiPhong: "Đang dọn dẹp",
-    tang: 2,
+    roomID: "205",
+    roomName: "Phòng 205",
+    roomTypeID: "DLX",
+    roomType: mockRoomTypes[1],
+    roomStatus: "Đang dọn dẹp",
+    floor: 2,
   },
 
   // Floor 3 - Suite Rooms
   {
-    maPhong: "301",
-    tenPhong: "Phòng 301",
-    maLoaiPhong: "SUT",
-    loaiPhong: mockRoomTypes[2],
-    trangThaiPhong: "Đang thuê",
-    tang: 3,
+    roomID: "301",
+    roomName: "Phòng 301",
+    roomTypeID: "SUT",
+    roomType: mockRoomTypes[2],
+    roomStatus: "Đang thuê",
+    floor: 3,
   },
   {
-    maPhong: "302",
-    tenPhong: "Phòng 302",
-    maLoaiPhong: "SUT",
-    loaiPhong: mockRoomTypes[2],
-    trangThaiPhong: "Trống",
-    tang: 3,
+    roomID: "302",
+    roomName: "Phòng 302",
+    roomTypeID: "SUT",
+    roomType: mockRoomTypes[2],
+    roomStatus: "Trống",
+    floor: 3,
   },
   {
-    maPhong: "303",
-    tenPhong: "Phòng 303",
-    maLoaiPhong: "SUT",
-    loaiPhong: mockRoomTypes[2],
-    trangThaiPhong: "Trống",
-    tang: 3,
+    roomID: "303",
+    roomName: "Phòng 303",
+    roomTypeID: "SUT",
+    roomType: mockRoomTypes[2],
+    roomStatus: "Trống",
+    floor: 3,
   },
   {
-    maPhong: "304",
-    tenPhong: "Phòng 304",
-    maLoaiPhong: "FAM",
-    loaiPhong: mockRoomTypes[3],
-    trangThaiPhong: "Đang thuê",
-    tang: 3,
+    roomID: "304",
+    roomName: "Phòng 304",
+    roomTypeID: "FAM",
+    roomType: mockRoomTypes[3],
+    roomStatus: "Đang thuê",
+    floor: 3,
   },
   {
-    maPhong: "305",
-    tenPhong: "Phòng 305",
-    maLoaiPhong: "FAM",
-    loaiPhong: mockRoomTypes[3],
-    trangThaiPhong: "Trống",
-    tang: 3,
+    roomID: "305",
+    roomName: "Phòng 305",
+    roomTypeID: "FAM",
+    roomType: mockRoomTypes[3],
+    roomStatus: "Trống",
+    floor: 3,
   },
 
   // Floor 4
   {
-    maPhong: "401",
-    tenPhong: "Phòng 401",
-    maLoaiPhong: "SUT",
-    loaiPhong: mockRoomTypes[2],
-    trangThaiPhong: "Trống",
-    tang: 4,
+    roomID: "401",
+    roomName: "Phòng 401",
+    roomTypeID: "SUT",
+    roomType: mockRoomTypes[2],
+    roomStatus: "Trống",
+    floor: 4,
   },
   {
-    maPhong: "402",
-    tenPhong: "Phòng 402",
-    maLoaiPhong: "SUT",
-    loaiPhong: mockRoomTypes[2],
-    trangThaiPhong: "Đang thuê",
-    tang: 4,
+    roomID: "402",
+    roomName: "Phòng 402",
+    roomTypeID: "SUT",
+    roomType: mockRoomTypes[2],
+    roomStatus: "Đang thuê",
+    floor: 4,
   },
   {
-    maPhong: "403",
-    tenPhong: "Phòng 403",
-    maLoaiPhong: "FAM",
-    loaiPhong: mockRoomTypes[3],
-    trangThaiPhong: "Trống",
-    tang: 4,
+    roomID: "403",
+    roomName: "Phòng 403",
+    roomTypeID: "FAM",
+    roomType: mockRoomTypes[3],
+    roomStatus: "Trống",
+    floor: 4,
   },
   {
-    maPhong: "404",
-    tenPhong: "Phòng 404",
-    maLoaiPhong: "FAM",
-    loaiPhong: mockRoomTypes[3],
-    trangThaiPhong: "Bảo trì",
-    tang: 4,
+    roomID: "404",
+    roomName: "Phòng 404",
+    roomTypeID: "FAM",
+    roomType: mockRoomTypes[3],
+    roomStatus: "Bảo trì",
+    floor: 4,
   },
   {
-    maPhong: "405",
-    tenPhong: "Phòng 405",
-    maLoaiPhong: "FAM",
-    loaiPhong: mockRoomTypes[3],
-    trangThaiPhong: "Đang dọn dẹp",
-    tang: 4,
+    roomID: "405",
+    roomName: "Phòng 405",
+    roomTypeID: "FAM",
+    roomType: mockRoomTypes[3],
+    roomStatus: "Đang dọn dẹp",
+    floor: 4,
   },
 ];
 
 // Helper function to get room statistics
 export const getRoomStatistics = (rooms: Room[]) => {
   const total = rooms.length;
-  const available = rooms.filter((r) => r.trangThaiPhong === "Trống").length;
-  const occupied = rooms.filter((r) => r.trangThaiPhong === "Đang thuê").length;
-  const cleaning = rooms.filter(
-    (r) => r.trangThaiPhong === "Đang dọn dẹp"
-  ).length;
-  const maintenance = rooms.filter(
-    (r) => r.trangThaiPhong === "Bảo trì"
-  ).length;
+  const available = rooms.filter((r) => r.roomStatus === "Trống").length;
+  const occupied = rooms.filter((r) => r.roomStatus === "Đang thuê").length;
+  const cleaning = rooms.filter((r) => r.roomStatus === "Đang dọn dẹp").length;
+  const maintenance = rooms.filter((r) => r.roomStatus === "Bảo trì").length;
 
   return {
     total,
@@ -244,7 +240,7 @@ export const getRoomStatistics = (rooms: Room[]) => {
 
 // Helper function to get unique floors
 export const getUniqueFloors = (rooms: Room[]): number[] => {
-  return Array.from(new Set(rooms.map((room) => room.tang))).sort(
+  return Array.from(new Set(rooms.map((room) => room.floor))).sort(
     (a, b) => a - b
   );
 };
@@ -253,8 +249,8 @@ export const getUniqueFloors = (rooms: Room[]): number[] => {
 export const getUniqueRoomTypes = (rooms: Room[]): RoomType[] => {
   const uniqueTypes = new Map<string, RoomType>();
   rooms.forEach((room) => {
-    if (!uniqueTypes.has(room.maLoaiPhong)) {
-      uniqueTypes.set(room.maLoaiPhong, room.loaiPhong);
+    if (!uniqueTypes.has(room.roomTypeID)) {
+      uniqueTypes.set(room.roomTypeID, room.roomType);
     }
   });
   return Array.from(uniqueTypes.values());

@@ -7,11 +7,10 @@ import {
   LogOut,
   Home,
   BedDouble,
-  TrendingUp,
   DollarSign,
   UserCheck,
 } from "lucide-react";
-import { getCurrentUser, mockLogout, type User } from "@/lib/mock-auth";
+import { getCurrentUser, mockLogout } from "@/lib/mock-auth";
 import { Button } from "@/components/ui/button";
 import { KPICard } from "@/components/dashboard/kpi-card";
 import { RoomStatusChart } from "@/components/dashboard/room-status-chart";
