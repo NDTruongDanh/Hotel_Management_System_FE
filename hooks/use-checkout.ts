@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { PaymentMethod } from "@/lib/types/payment";
 import type {
   RentalReceipt,
   CheckoutSummary,
@@ -21,6 +22,7 @@ export function useCheckOut() {
     useState<CheckoutSummary | null>(null);
   const [showAddServiceModal, setShowAddServiceModal] = useState(false);
   const [showAddPenaltyModal, setShowAddPenaltyModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   const handleSearch = (searchQuery: string) => {
     setQuery(searchQuery);
@@ -92,33 +94,24 @@ export function useCheckOut() {
     return true;
   };
 
-  const handleCompleteCheckout = (): {
-    confirmed: boolean;
-    roomName: string;
-  } => {
-    if (!selectedCheckout) return { confirmed: false, roomName: "" };
+  const handleCompleteCheckout = () => {
+    // Open payment modal instead of native confirm
+    setShowPaymentModal(true);
+  };
 
-    // This would open payment modal in real app
-    const confirmed = window.confirm(
-      `Xác nhận thanh toán ${new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-      }).format(selectedCheckout.grandTotal)}?`
+  const handleConfirmPayment = (method: PaymentMethod): string => {
+    if (!selectedCheckout) return "";
+
+    console.log("Confirm payment with method:", method);
+
+    const roomName = selectedCheckout.receipt.roomName;
+    // Remove from results and reset selected checkout
+    setResults((prev) =>
+      prev.filter((r) => r.receiptID !== selectedCheckout.receiptID)
     );
-
-    if (confirmed) {
-      const roomName = selectedCheckout.receipt.roomName;
-
-      // Remove from results and reset
-      setResults((prev) =>
-        prev.filter((r) => r.receiptID !== selectedCheckout.receiptID)
-      );
-      setSelectedCheckout(null);
-
-      return { confirmed: true, roomName };
-    }
-
-    return { confirmed: false, roomName: "" };
+    setSelectedCheckout(null);
+    setShowPaymentModal(false);
+    return roomName;
   };
 
   return {
@@ -127,13 +120,16 @@ export function useCheckOut() {
     selectedCheckout,
     showAddServiceModal,
     showAddPenaltyModal,
+    showPaymentModal,
     handleSearch,
     handleSelectRental,
     handleBackToSearch,
     handleAddService,
     handleAddPenalty,
     handleCompleteCheckout,
+    handleConfirmPayment,
     setShowAddServiceModal,
     setShowAddPenaltyModal,
+    setShowPaymentModal,
   };
 }
