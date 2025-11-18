@@ -194,38 +194,44 @@ Components:
 
 ---
 
-## **6\. Component Design (Thiết kế Components)**
-
 ### **6.1. Buttons**
 
-/\* Primary Button \*/  
-background: Primary-600  
-color: White  
-padding: 10px 20px (sm: 8px 16px, lg: 12px 24px)  
-border-radius: 6px  
-font-weight: 500  
-transition: all 0.2s
+/_ Base Styles _/
+border-radius: 6px (rounded-md)
+font-size: 14px (text-sm)
+font-weight: 500 (font-medium)
+transition: all
+disabled: opacity: 0.5, pointer-events: none
+focus: ring: 3px, ring-color: ring/50
 
-hover: background: Primary-700, box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2)  
-active: background: Primary-800  
-disabled: background: Gray-300, color: Gray-500, cursor: not-allowed
+/_ Primary Button (variant: default) _/
+background: Primary (var(--primary))
+color: Primary Foreground (var(--primary-foreground))
+hover: background: Primary/90
 
-/\* Secondary Button \*/  
-background: White  
-color: Primary-600  
-border: 1px solid Primary-600
+/_ Destructive Button (variant: destructive) _/
+background: Destructive (var(--destructive))
+color: White
+hover: background: Destructive/90
 
-hover: background: Primary-50
+/_ Outline Button (variant: outline) _/
+border: 1px solid Input (var(--border))
+background: transparent
+hover: background: Accent (var(--accent)), color: Accent Foreground (var(--accent-foreground))
 
-/\* Ghost Button \*/  
-background: Transparent  
-color: Gray-700  
-hover: background: Gray-100
+/_ Secondary Button (variant: secondary) _/
+background: Secondary (var(--secondary))
+color: Secondary Foreground (var(--secondary-foreground))
+hover: background: Secondary/80
 
-/\* Danger Button \*/  
-background: Error-600  
-color: White  
-hover: background: Error-700
+/_ Ghost Button (variant: ghost) _/
+background: transparent
+hover: background: Accent (var(--accent)), color: Accent Foreground (var(--accent-foreground))
+
+/_ Link Button (variant: link) _/
+background: transparent
+color: Primary (var(--primary))
+text-decoration: underline
 
 ### **6.2. Form Controls**
 
