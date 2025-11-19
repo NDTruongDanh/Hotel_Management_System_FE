@@ -1,6 +1,6 @@
 "use client";
 
-import { RevenueByDayTable } from "./revenue-by-day-table";
+import { RevenueByMonthTable } from "./revenue-by-month-table";
 import type { RevenueByMonthData } from "@/lib/types/reports";
 
 interface RevenueByMonthReportProps {
@@ -12,7 +12,7 @@ export function RevenueByMonthReport({
 }: RevenueByMonthReportProps) {
   return (
     <div className="space-y-6">
-      <RevenueByDayTable data={filteredRevenueByMonthData} />
+      <RevenueByMonthTable data={filteredRevenueByMonthData} />
     </div>
   );
 }

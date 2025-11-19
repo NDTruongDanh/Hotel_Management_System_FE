@@ -17,6 +17,7 @@ export { OccupancyStatisticsCard } from "./occupancy-statistics-card";
 
 // Tables
 export { RevenueByDayTable } from "./revenue-by-day-table";
+export { RevenueByMonthTable } from "./revenue-by-month-table";
 export { OccupancyRateTable } from "./occupancy-rate-table";
 export { RoomAvailabilityTable } from "./room-availability-table";
 export { CustomerListTable } from "./customer-list-table";
