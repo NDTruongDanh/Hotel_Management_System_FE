@@ -77,6 +77,11 @@ const serviceManagement = [
 
 const adminManagement = [
   {
+    title: "Khách hàng",
+    url: "/customers",
+    icon: ICONS.USER,
+  },
+  {
     title: "Nhân Viên",
     url: "/staff",
     icon: ICONS.USER_COG,
@@ -94,7 +99,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <Sidebar collapsible="icon" variant="sidebar" {...props}>
+      <Sidebar
+        collapsible="icon"
+        variant="sidebar"
+        data-sidebar-state={state}
+        {...props}
+      >
         <SidebarHeader className="border-b border-gray-200 bg-white">
           <div className="flex items-center gap-2 px-4 py-3 group-data-[collapsible=icon]:px-2 group-data-[collapsible=icon]:justify-center">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-600 text-white">

@@ -1,53 +1,9 @@
 import {
   Reservation,
   ReservationDetail,
-  Customer,
   ReservationEvent,
 } from "@/lib/types/reservation";
-
-// Mock Customers
-export const mockCustomers: Customer[] = [
-  {
-    customerID: "KH001",
-    customerName: "Nguyễn Văn An",
-    phoneNumber: "0901234567",
-    email: "nguyenvanan@email.com",
-    identityCard: "079012345678",
-    address: "123 Lê Lợi, Q.1, TP.HCM",
-  },
-  {
-    customerID: "KH002",
-    customerName: "Trần Thị Bình",
-    phoneNumber: "0912345678",
-    email: "tranthibinh@email.com",
-    identityCard: "079087654321",
-    address: "456 Nguyễn Huệ, Q.1, TP.HCM",
-  },
-  {
-    customerID: "KH003",
-    customerName: "Lê Minh Cường",
-    phoneNumber: "0923456789",
-    email: "leminhcuong@email.com",
-    identityCard: "079098765432",
-    address: "789 Trần Hưng Đạo, Q.5, TP.HCM",
-  },
-  {
-    customerID: "KH004",
-    customerName: "Phạm Thu Duyên",
-    phoneNumber: "0934567890",
-    email: "phamthuduyen@email.com",
-    identityCard: "079011223344",
-    address: "321 Võ Văn Tần, Q.3, TP.HCM",
-  },
-  {
-    customerID: "KH005",
-    customerName: "Hoàng Văn Em",
-    phoneNumber: "0945678901",
-    email: "hoangvanem@email.com",
-    identityCard: "079055667788",
-    address: "654 Lý Thường Kiệt, Q.10, TP.HCM",
-  },
-];
+import { mockCustomers } from "@/lib/mock-customers";
 
 // Mock Reservation Details
 const mockReservationDetails: ReservationDetail[] = [

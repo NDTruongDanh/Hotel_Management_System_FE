@@ -42,6 +42,10 @@ import {
   CalendarCheck,
   XCircle,
   Save,
+  Download,
+  PieChart,
+  LineChart,
+  BarChart2,
 } from "lucide-react";
 
 export const ICONS = {
@@ -88,4 +92,8 @@ export const ICONS = {
   CALENDAR_CHECK: <CalendarCheck />,
   X_CIRCLE: <XCircle />,
   SAVE: <Save />,
+  DOWNLOAD: <Download />,
+  PIE_CHART: <PieChart />,
+  LINE_CHART: <LineChart />,
+  BAR_CHART_2: <BarChart2 />,
 };

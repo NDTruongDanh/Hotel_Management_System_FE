@@ -140,22 +140,21 @@ export function RoomTypeTable({
                   </div>
                 </TableCell>
                 <TableCell className="text-right">
-                  <div className="flex items-center justify-end gap-2">
+                  <div className="flex justify-end gap-2">
                     <Button
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
                       onClick={() => onEdit(roomType)}
-                      className="h-8 px-3 text-primary-blue-600 hover:bg-primary-blue-50 hover:text-primary-blue-700"
+                      className="text-primary-600 hover:text-primary-700 hover:bg-primary-50"
                     >
-                      <span className="w-4 h-4 mr-1">{ICONS.EDIT}</span>
-                      Sửa
+                      {ICONS.EDIT}
+                      <span className="ml-1">Sửa</span>
                     </Button>
                     <Button
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
                       onClick={() => handleDeleteClick(roomType)}
-                      disabled={isDeleting === roomType.roomTypeID}
-                      className="h-8 px-3 text-error-600 hover:bg-error-50 hover:text-error-700 disabled:opacity-50"
+                      className="text-error-600 hover:text-error-700 hover:bg-error-50"
                     >
                       <span className="w-4 h-4 mr-1">{ICONS.TRASH}</span>
                       {isDeleting === roomType.roomTypeID
