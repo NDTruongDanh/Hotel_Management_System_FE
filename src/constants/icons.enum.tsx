@@ -46,6 +46,14 @@ import {
   PieChart,
   LineChart,
   BarChart2,
+  Phone,
+  Mail,
+  MapPin,
+  CreditCard as IdCard,
+  Star,
+  Building2,
+  History,
+  UserPlus,
 } from "lucide-react";
 
 export const ICONS = {
@@ -96,4 +104,12 @@ export const ICONS = {
   PIE_CHART: <PieChart />,
   LINE_CHART: <LineChart />,
   BAR_CHART_2: <BarChart2 />,
+  PHONE: <Phone />,
+  MAIL: <Mail />,
+  MAP_PIN: <MapPin />,
+  ID_CARD: <IdCard />,
+  STAR: <Star />,
+  BUILDING: <Building2 />,
+  HISTORY: <History />,
+  USER_PLUS: <UserPlus />,
 };

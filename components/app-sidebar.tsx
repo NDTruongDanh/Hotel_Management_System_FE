@@ -62,6 +62,14 @@ const bookingManagement = [
   },
 ];
 
+const customerManagement = [
+  {
+    title: "Khách Hàng",
+    url: "/customers",
+    icon: ICONS.USERS,
+  },
+];
+
 const serviceManagement = [
   {
     title: "Dịch Vụ",
@@ -234,6 +242,45 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupContent>
               <SidebarMenu>
                 {serviceManagement.map((item) => {
+                  const isActive = pathname === item.url;
+                  return (
+                    <SidebarMenuItem key={item.title}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <SidebarMenuButton
+                            asChild
+                            className={cn(
+                              "transition-colors",
+                              isActive
+                                ? "bg-primary-100 text-primary-600 border-l-4 border-primary-600 hover:bg-primary-100"
+                                : "hover:bg-primary-100 hover:text-primary-600 text-gray-700"
+                            )}
+                          >
+                            <Link href={item.url}>
+                              {item.icon}
+                              <span>{item.title}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
+                          {item.title}
+                        </TooltipContent>
+                      </Tooltip>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
+          {/* Customer Management */}
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              Quản lý Khách hàng
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {customerManagement.map((item) => {
                   const isActive = pathname === item.url;
                   return (
                     <SidebarMenuItem key={item.title}>
