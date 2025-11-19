@@ -7,6 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -15,8 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import type { CustomerRecord } from "@/lib/types/customer";
+import { ICONS } from "@/src/constants/icons.enum";
 
 interface CustomerDetailsModalProps {
   open: boolean;
@@ -31,52 +33,107 @@ export function CustomerDetailsModal({
 }: CustomerDetailsModalProps) {
   if (!customer) return null;
 
-  const infoItems = [
+  const contactInfo = [
     { label: "Mã khách", value: customer.customerId },
-    { label: "Trạng thái", value: customer.status },
     { label: "Số điện thoại", value: customer.phoneNumber },
     { label: "Email", value: customer.email },
     { label: "CCCD / MST", value: customer.identityCard },
     { label: "Quốc tịch", value: customer.nationality },
-    { label: "Địa chỉ", value: customer.address },
+    { label: "Địa chỉ", value: customer.address, fullWidth: true },
+  ];
+
+  const bookingInfo = [
+    { label: "Trạng thái", value: customer.status },
     { label: "Tổng số lần đặt", value: `${customer.totalBookings} lần` },
-    {
-      label: "Tổng chi tiêu",
-      value: formatCurrency(customer.totalSpent),
-    },
-    {
-      label: "Lần ghé gần nhất",
-      value: customer.lastVisit || "Chưa có",
-    },
+    { label: "Tổng chi tiêu", value: formatCurrency(customer.totalSpent) },
+    { label: "Lần ghé gần nhất", value: customer.lastVisit || "Chưa có" },
   ];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-3">
-            <span>{customer.customerName}</span>
-            <Badge className="bg-primary-100 text-primary-700 border-0">
-              {customer.customerType}
-            </Badge>
-            {customer.isVip && (
-              <Badge className="bg-warning-100 text-warning-700 border-0">
-                VIP
+      <DialogContent className="w-fit max-w-7xl sm:max-w-none max-h-[85vh] overflow-y-auto">
+        <DialogHeader className="pr-12">
+          <DialogTitle className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <h3 className="text-2xl font-semibold text-gray-900">
+                {customer.customerName}
+              </h3>
+              <p className="text-gray-600 mt-1">
+                Khách {customer.customerType.toLowerCase()}
+              </p>
+            </div>
+            <div className="flex flex-col items-start gap-2 sm:items-end">
+              <div className="flex items-center gap-2">
+                <Badge className="bg-primary-100 text-primary-700 border-0">
+                  {customer.customerType}
+                </Badge>
+                {customer.isVip && (
+                  <Badge className="bg-warning-100 text-warning-700 border-0">
+                    VIP
+                  </Badge>
+                )}
+              </div>
+              <Badge
+                className={`${
+                  CUSTOMER_STATUS_COLORS[customer.status]
+                } border-0 text-sm`}
+              >
+                {customer.status}
               </Badge>
-            )}
+            </div>
           </DialogTitle>
           <DialogDescription>
             Hồ sơ khách hàng và lịch sử đặt phòng gần nhất
           </DialogDescription>
         </DialogHeader>
-
         <div className="space-y-6">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {infoItems.map((item) => (
-              <InfoItem key={item.label} label={item.label}>
-                {item.value}
-              </InfoItem>
-            ))}
+          <Separator />
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              {ICONS.USER}
+              Thông tin liên hệ
+            </h4>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {contactInfo.map((item) => (
+                <div
+                  key={item.label}
+                  className={item.fullWidth ? "sm:col-span-2" : undefined}
+                >
+                  <p className="text-sm text-gray-600">{item.label}</p>
+                  <p className="font-medium text-gray-900 mt-1">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              {ICONS.CLIPBOARD_LIST}
+              Thông tin đặt phòng
+            </h4>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {bookingInfo.map((item) => (
+                <div key={item.label}>
+                  <p className="text-sm text-gray-600">{item.label}</p>
+                  {item.label === "Trạng thái" ? (
+                    <Badge
+                      className={`${
+                        CUSTOMER_STATUS_COLORS[customer.status]
+                      } border-0 mt-1`}
+                    >
+                      {item.value}
+                    </Badge>
+                  ) : (
+                    <p className="font-medium text-gray-900 mt-1">
+                      {item.value}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           {customer.notes && (
@@ -87,6 +144,8 @@ export function CustomerDetailsModal({
               <p className="text-sm text-primary-900 mt-1">{customer.notes}</p>
             </div>
           )}
+
+          <Separator />
 
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-3">
@@ -157,21 +216,10 @@ export function CustomerDetailsModal({
   );
 }
 
-interface InfoItemProps {
-  label: string;
-  children: React.ReactNode;
-}
-
-function InfoItem({ label, children }: InfoItemProps) {
-  return (
-    <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-      <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
-        {label}
-      </p>
-      <p className="text-sm text-gray-900 mt-1 wrap-break-word">{children}</p>
-    </div>
-  );
-}
+const CUSTOMER_STATUS_COLORS: Record<CustomerRecord["status"], string> = {
+  "Hoạt động": "bg-success-100 text-success-700",
+  "Đã vô hiệu": "bg-gray-100 text-gray-700",
+};
 
 const statusStyles: Record<string, string> = {
   "Đã đặt": "bg-info-100 text-info-700",
