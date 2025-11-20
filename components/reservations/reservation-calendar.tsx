@@ -116,7 +116,7 @@ export function ReservationCalendar({
                       <button
                         onClick={() => onEventClick?.(event)}
                         className={cn(
-                          "absolute left-1 right-1 top-1 bottom-1 rounded text-xs p-1 border transition-all hover:shadow-md hover:z-10",
+                          "absolute left-1 right-1 top-1 bottom-1 rounded text-xs p-1 border transition-all z-10 hover:z-20 hover:shadow-md",
                           STATUS_COLORS[event.status],
                           "text-left overflow-hidden"
                         )}
